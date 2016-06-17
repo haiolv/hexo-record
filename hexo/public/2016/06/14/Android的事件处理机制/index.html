@@ -1,0 +1,1047 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Activity事件传递,dispatchEvent," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android的事件处理机制Android的事件产生是从我们触摸屏幕开始，在经过Input子系统，最后达到我们的应用程序(或者经过WindowManagerService到达应用程序)。
+而其中Input子系统在Java层对应着InputManagerService，其主要在native层，由InputReader读取EventHub的元数据，将这些数据加工成InputEvent，最后发到Inpu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的事件处理机制">
+<meta property="og:url" content="http://91yang.github.io/2016/06/14/Android的事件处理机制/index.html">
+<meta property="og:site_name" content="Glory Seeker">
+<meta property="og:description" content="Android的事件处理机制Android的事件产生是从我们触摸屏幕开始，在经过Input子系统，最后达到我们的应用程序(或者经过WindowManagerService到达应用程序)。
+而其中Input子系统在Java层对应着InputManagerService，其主要在native层，由InputReader读取EventHub的元数据，将这些数据加工成InputEvent，最后发到Inpu">
+<meta property="og:image" content="http://i.imgur.com/yugKXH4.png">
+<meta property="og:updated_time" content="2016-06-14T11:01:24.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的事件处理机制">
+<meta name="twitter:description" content="Android的事件处理机制Android的事件产生是从我们触摸屏幕开始，在经过Input子系统，最后达到我们的应用程序(或者经过WindowManagerService到达应用程序)。
+而其中Input子系统在Java层对应着InputManagerService，其主要在native层，由InputReader读取EventHub的元数据，将这些数据加工成InputEvent，最后发到Inpu">
+<meta name="twitter:image" content="http://i.imgur.com/yugKXH4.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://91yang.github.io/2016/06/14/Android的事件处理机制/"/>
+
+  <title> Android的事件处理机制 | Glory Seeker </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Glory Seeker</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Make progress step by step everyday！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android的事件处理机制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-14T18:59:48+08:00" content="2016-06-14">
+              2016-06-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Android的事件处理机制"><a href="#Android的事件处理机制" class="headerlink" title="Android的事件处理机制"></a>Android的事件处理机制</h2><p>Android的事件产生是从我们触摸屏幕开始，在经过Input子系统，最后达到我们的应用程序(或者经过WindowManagerService到达应用程序)。</p>
+<p>而其中Input子系统在Java层对应着InputManagerService，其主要在native层，由InputReader读取EventHub的元数据，将这些数据加工成InputEvent，最后发到InputDispatcher，而InputDispatcher则负责将事件发到应用程序，Input子系统流程可以参见这篇文章 <a href="http://www.cnblogs.com/haiming/p/3318614.html" title="Android Framework——之Input子系统" target="_blank" rel="external">Android Framework——之Input子系统</a>。 和 <a href="http://blog.csdn.net/yclzh0522/article/details/6920522" title="http://blog.csdn.net/yclzh0522/article/details/6920522" target="_blank" rel="external">Android 事件捕捉和处理流程分析</a></p>
+<p>对于应用层的时间流程，主要是下面的流程图所示：<br><img src="http://i.imgur.com/yugKXH4.png" alt="key-transfer"></p>
+<p>其中最后一步就是我们经常说的View事件派发流程。而在流程图中，我们也看到，调了两次DecorView的方法，第一次是调用DecorView的dispatchTouchEvent，它的源码是:</p>
+<pre><code>@Override
+public boolean dispatchTouchEvent(MotionEvent ev) {
+    final Callback cb = getCallback();
+    return cb != null &amp;&amp; !isDestroyed() &amp;&amp; mFeatureId &lt; 0 ? cb.dispatchTouchEvent(ev)
+            : super.dispatchTouchEvent(ev);
+}
+</code></pre><p>调用了Callback的dispatchTouchEvent，那这个Callback是什么类型呢？</p>
+<p>Callback就是Window.Callback，Activity实现了这个接口。在Activity的attach函数中，会调用window的setCallback，将Activity设置给Window。所以这里getCallback返回的就是Activity，最终会调用Activity的dispatchTouchEvent。</p>
+<pre><code>public boolean dispatchTouchEvent(MotionEvent ev) {
+    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+        onUserInteraction();
+    }
+    if (getWindow().superDispatchTouchEvent(ev)) {
+        return true;
+    }
+    return onTouchEvent(ev);
+}
+</code></pre><p>在ACTION_DOWN事件处理的时候会调用onUserInteraction方法，然后调用Window（实际上是PhoneWindow)的superDispatchTouchEvent，如果Window的superDispatchTouchEvent消耗了事件，则直接返回，不会调用Activity的onTouchEvent方法。</p>
+<pre><code>public boolean superDispatchTouchEvent(MotionEvent event) {
+    return mDecor.superDispatchTouchEvent(event);
+}
+</code></pre><p>而DecorView的superDispatchTouchEvent为:</p>
+<pre><code>public boolean superDispatchTouchEvent(MotionEvent event) {
+    return super.dispatchTouchEvent(event);
+}
+</code></pre><p>最终还是调用DecorView的父类的dispatchTouchEvent，DecorView的父类是FrameLayout，它没实现该方法，最终会调用ViewGroup的dispatchTouchEvent方法。从这里开始就进入了view树的事件派发流程了。</p>
+<p>此外，关于Android view树的事件派发流程，众说纷纭，给出一篇参考文章</p>
+<p>Reference：<a href="http://www.infoq.com/cn/articles/android-event-delivery-mechanism/" title="http://www.infoq.com/cn/articles/android-event-delivery-mechanism/" target="_blank" rel="external">Android事件传递机制</a></p>
+<p>然后，站在前人的肩膀上，接下俩文章主要做些验证。</p>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question:"></a>Question:</h3><ul>
+<li><p>Activity中dispatchTouchEvent在什么时候调用？</p>
+</li>
+<li><p>MotionEvent事件向下分发，是通过什么途径？通过dispatchKeyEvent的返回值？</p>
+</li>
+</ul>
+<p>简单列举下工程</p>
+<ul>
+<li><p>Activity:</p>
+<pre><code>// haio.com.event.MainActivity
+
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;Activity---onTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;Activity---onTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;Activity---onTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+    boolean isTouch = super.onTouchEvent(event);
+    System.out.println(&quot;Activity---onTouchEvent---isTouch =&quot; + isTouch);
+    return isTouch;
+}
+
+@Override
+public boolean dispatchTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;Activity---dispatchTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;Activity---dispatchTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;Activity---dispatchTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+//        boolean isDispatch = super.dispatchTouchEvent(event);
+    boolean isDispatch = true;
+    System.out.println(&quot;Activity---dispatchTouchEvent---isDispatch =&quot; + isDispatch);
+    return isDispatch;
+}
+
+@Override
+public boolean onKeyDown(int keyCode, KeyEvent event) {
+    System.out.println(&quot;Activity---onKeyDown---DOWN&quot;);
+    boolean isDown = super.onKeyDown(keyCode, event);
+    System.out.println(&quot;Activity---onKeyDown---isDown =&quot; + isDown);
+    return isDown;
+}
+</code></pre></li>
+</ul>
+<ul>
+<li><p>HButton</p>
+<p>  View(如 Button等) 涉及事件分发共涉及两个个事件</p>
+<ul>
+<li>dispatchTouchEvent</li>
+<li><p>onTouchEvent</p>
+<pre><code>//haio.com.event.widget.HButton
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;HButton---onTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;HButton---onTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;HButton---onTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+    boolean isTouch = super.onTouchEvent(event);
+    System.out.println(&quot;HButton---onTouchEvent---isTouch =&quot; + isTouch);
+    return isTouch;
+}
+
+@Override
+public boolean dispatchTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;HButton---dispatchTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;HButton---dispatchTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;HButton---dispatchTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+    boolean isDispatch = super.dispatchTouchEvent(event);
+//        boolean isDispatch = true;
+    System.out.println(&quot;HButton---dispatchTouchEvent---isDispatch =&quot; + isDispatch);
+    return isDispatch;
+}
+</code></pre></li>
+</ul>
+</li>
+<li><p>ViewGroup</p>
+<p>  ViewGroup 涉及事件分发共涉及三个事件</p>
+<ul>
+<li>dispatchTouchEvent</li>
+<li>onInterceptTouchEvent</li>
+<li><p>onTouchEvent</p>
+<pre><code>//haio.com.event.widget.HLinearLayout
+
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;HLinearLayout---onTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;HLinearLayout---onTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;HLinearLayout---onTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+    boolean isTouch = super.onTouchEvent(event);
+    System.out.println(&quot;HLinearLayout---onTouchEvent---isTouch =&quot; + isTouch);
+    return isTouch;
+}
+
+@Override
+public boolean onInterceptTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;HLinearLayout---onInterceptTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;HLinearLayout---onInterceptTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;HLinearLayout---onInterceptTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+
+    boolean isIntercept = super.onInterceptTouchEvent(event);
+    System.out.println(&quot;HLinearLayout---onInterceptTouchEvent---isIntercept =&quot; + isIntercept);
+    return isIntercept;
+}
+
+@Override
+public boolean dispatchTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;HLinearLayout---dispatchTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;HLinearLayout---dispatchTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;HLinearLayout---dispatchTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+    boolean isDispatch = super.dispatchTouchEvent(event);
+//        boolean isDispatch = true;
+    System.out.println(&quot;HLinearLayout---dispatchTouchEvent---isDispatch =&quot; + isDispatch);
+    return isDispatch;
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>上述代码，细心的小伙伴们会发现，将MainActivity 中dispatchTouchEvent的返回值改为true,并屏蔽掉</p>
+<pre><code>super.dispatchTouchEvent(event)
+</code></pre><p>的调用，然后分别点击 Button 和 TextView的日志为：</p>
+<pre><code>1.点击按钮：
+06-14 17:41:58.639 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---DOWN
+06-14 17:41:58.639 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:41:58.689 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---MOVE
+06-14 17:41:58.689 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:41:58.694 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---UP
+06-14 17:41:58.694 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+
+2.点击文本：
+06-14 17:41:58.694 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:51:09.684 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---DOWN
+06-14 17:51:09.684 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:51:09.809 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---UP
+06-14 17:51:09.809 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+</code></pre><p>然后，我们在将MainActivity 中dispatchTouchEvent的返回值改为false，查看日志：</p>
+<pre><code>06-14 17:54:23.509 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---DOWN
+06-14 17:54:23.509 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+06-14 17:54:23.524 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---MOVE
+06-14 17:54:23.524 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+06-14 17:54:23.579 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---UP
+06-14 17:54:23.579 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+</code></pre><p>从上面，我们得知，dispatchTouchEvent返回true 表明当前view/viewGroup负责处理该事件 ，false表明不负责处理该事件， 从日志打印结果中看出return true是不会有任何区别的。</p>
+<p>那么，问题来了，Activity是通过调用上面来分发事件的呢？</p>
+<p>我们将 MainActivity 中dispatchTouchEvent 改成如下，放开 super.dispatchTouchEvent(event) 的调用，并且返回true，表示 负责处理该事件。</p>
+<pre><code>public boolean dispatchTouchEvent(MotionEvent event) {
+    switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            System.out.println(&quot;Activity---dispatchTouchEvent---DOWN&quot;);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            System.out.println(&quot;Activity---dispatchTouchEvent---MOVE&quot;);
+            break;
+        case MotionEvent.ACTION_UP:
+            System.out.println(&quot;Activity---dispatchTouchEvent---UP&quot;);
+            break;
+        default:
+            break;
+    }
+
+
+    boolean isDispatch = super.dispatchTouchEvent(event);
+//        boolean isDispatch = false;
+    isDispatch = true;
+
+
+    System.out.println(&quot;Activity---dispatchTouchEvent---isDispatch =&quot; + isDispatch);
+    return isDispatch;
+}
+</code></pre><p>日志打印为：</p>
+<pre><code>06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---isIntercept =false
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HButton---onTouch---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---DOWN
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---isTouch =true
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---MOVE
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---MOVE
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---MOVE
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---isIntercept =false
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---MOVE
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HButton---onTouch---MOVE
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---MOVE
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---isTouch =true
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.234 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---UP
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---UP
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---UP
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---isIntercept =false
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---UP
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HButton---onTouch---UP
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---UP
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---isTouch =true
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.239 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.249 17504-17504/haio.com.event I/System.out: HButton---onClick---DOWN
+</code></pre><p>事件分发了，这说明：</p>
+<p>dispatchTouchEvent返回true 表明当前view/viewGroup负责处理该事件 false表明不负责处理该事件 在MainActivity中 如果你把return值改为false 打印结果和return true是不会有任何区别的 因为你根本就没有向下进行分发 MainActivity中分发是调用super.dispatchTouchEvent的。</p>
+<p>注意，一个事件分发的完整过程：</p>
+<pre><code>06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---isIntercept =false
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HButton---onTouch---DOWN
+06-14 17:58:12.159 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---DOWN
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---isTouch =true
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---isDispatch =true
+06-14 17:58:12.169 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =true
+</code></pre><p>后面三行打印，说明HButton、HLinearLayout、Activity都负责此事件，因此后续事件还会分发到HButton、HLinearLayout、Activity上。</p>
+<h4 id="如果-子View不消耗事件，则回溯给Activity进行执行"><a href="#如果-子View不消耗事件，则回溯给Activity进行执行" class="headerlink" title="如果 子View不消耗事件，则回溯给Activity进行执行"></a>如果 子View不消耗事件，则回溯给Activity进行执行</h4><p>当你把HButton中的dispatchTouchEvent返回值改变为false的时候 说明没有调用View.onTouchEvent来消费事件,日志如下：</p>
+<pre><code>06-14 18:09:10.934 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---DOWN
+06-14 18:09:10.959 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---DOWN
+06-14 18:09:10.979 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---DOWN
+06-14 18:09:10.979 17504-17504/haio.com.event I/System.out: HLinearLayout---onInterceptTouchEvent---isIntercept =false
+06-14 18:09:10.979 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---DOWN
+06-14 18:09:10.979 17504-17504/haio.com.event I/System.out: HButton---onTouch---DOWN
+06-14 18:09:10.979 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---DOWN
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---isTouch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---isDispatch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HLinearLayout---onTouchEvent---DOWN
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HLinearLayout---onTouchEvent---isTouch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---isDispatch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---DOWN
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---isTouch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+06-14 18:09:11.014 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---MOVE
+06-14 18:09:11.044 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---MOVE
+06-14 18:09:11.044 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---isTouch =false
+06-14 18:09:11.044 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+06-14 18:09:11.044 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---UP
+06-14 18:09:11.049 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---UP
+06-14 18:09:11.049 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---isTouch =false
+06-14 18:09:11.049 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+</code></pre><p>如上，当你把HButton中的dispatchTouchEvent返回值改变为false的时候 说明没有调用View.onTouchEvent来消费事件, 所以返回之后最终MainActivity的onTouchEvent还是会对Event进行处理, 假如某层dispatchTouchEvent返回值为false,那么后续的move up等等action就不会再被分发到当前层了.</p>
+<p>注意，针对以上，下面日志反应一个事件的分发过程</p>
+<pre><code>06-14 18:09:10.979 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---DOWN
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HButton---onTouchEvent---isTouch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HButton---dispatchTouchEvent---isDispatch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HLinearLayout---onTouchEvent---DOWN
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HLinearLayout---onTouchEvent---isTouch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: HLinearLayout---dispatchTouchEvent---isDispatch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---DOWN
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---isTouch =false
+06-14 18:09:10.994 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+</code></pre><p>打印说明HButton、HLinearLayout都不负责此事件（返回false），因此后续事件就不会分发到HButton、HLinearLayout上。</p>
+<pre><code>06-14 18:09:11.044 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---UP
+06-14 18:09:11.049 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---UP
+06-14 18:09:11.049 17504-17504/haio.com.event I/System.out: Activity---onTouchEvent---isTouch =false
+06-14 18:09:11.049 17504-17504/haio.com.event I/System.out: Activity---dispatchTouchEvent---isDispatch =false
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="haiolv WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="haiolv Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Activity事件传递/" rel="tag">#Activity事件传递</a>
+          
+            <a href="/tags/dispatchEvent/" rel="tag">#dispatchEvent</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/14/TCP_IP--三次握手-四次挥手/" rel="next" title="TCP/IP--三次握手，四次挥手">
+                <i class="fa fa-chevron-left"></i> TCP/IP--三次握手，四次挥手
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.jpg"
+               alt="haiolv" />
+          <p class="site-author-name" itemprop="name">haiolv</p>
+          <p class="site-description motion-element" itemprop="description">Just do it</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haiolv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://developer.android.com/" target="_blank" title="Android 官网">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Android 官网
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cstsinghua.github.io/" title="Atypical programmer" target="_blank">Atypical programmer</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hellokugo.github.io/" title="Hellokugo" target="_blank">Hellokugo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://aso210.github.io/" title="Aso210" target="_blank">Aso210</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android的事件处理机制"><span class="nav-number">1.</span> <span class="nav-text">Android的事件处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">1.1.</span> <span class="nav-text">Question:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果-子View不消耗事件，则回溯给Activity进行执行"><span class="nav-number">1.1.1.</span> <span class="nav-text">如果 子View不消耗事件，则回溯给Activity进行执行</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haiolv</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
