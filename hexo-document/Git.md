@@ -212,6 +212,39 @@ reset HEAD可将暂存区中的内容还原至工作区：
 通过本地模拟可基本了解远程仓库一些基本操作，也可将远程仓库放到网络服务器或者托管网站，如github中，将代码或者笔记随时提交到远程仓库，这样既安全也方便自己随时随地查看。
 
 
+** git add 时提示 “Filename too long” 解决办法
+
+git config –global core.longpaths true
+
+
+
+## 通过命令行创建一个 远程仓库
+
+以往我们在githubs上面新建一个远程仓库需要这样几个步骤：
+
+打开浏览器登录github
+点击右上角的加号，点击 New repository
+输入Repository name，点击 Create repository
+这样就需要用到鼠标通过浏览器进行添加，熟悉用vim的朋友应该有体会写着代码突然换用鼠标操作的模式是有点难受的。
+
+于是我就十分的难受，没有鼠标就真的没法新建远程仓库了吗？
+
+答案是否定的，我翻到了  [Github Repository API](https://developer.github.com/v3/repos/ "https://developer.github.com/v3/repos/") ，上面说只需要认证用户发一个POST就可以新建，于是使用curl构造POST:
+
+	Vim
+	
+	curl -u 'username' https://api.github.com/user/repos -d '{"name":"RepoName"}'
+
+其中，username是你的用户名，RepoName是你想命名的仓库名。这条命令执行后输入密码就创建成功了，会有仓库相关信息的回显。
+
+接着，就可以添加远程仓库并Push:
+
+	Vim
+	
+	git remote add origin git@github.com:username/RepoName.git
+	git push origin master
+
+
 参考：  
 [http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000 "http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000")  
 [http://www.ruanyifeng.com/blog/2014/06/git_remote.html](http://www.ruanyifeng.com/blog/2014/06/git_remote.html "http://www.ruanyifeng.com/blog/2014/06/git_remote.html")
