@@ -258,6 +258,174 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/17/Android小工具-方法计数统计DexCount-md/" itemprop="url">
+                  Android小工具--方法计数统计DexCount.md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-17T11:59:52+08:00" content="2016-06-17">
+              2016-06-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Android小工具–方法计数统计DexCount"><a href="#Android小工具–方法计数统计DexCount" class="headerlink" title="Android小工具–方法计数统计DexCount"></a>Android小工具–方法计数统计DexCount</h2><p>download:<a href="https://github.com/haiolv/tool-android" title="https://github.com/haiolv/tool-android" target="_blank" rel="external">Android小工具–方法计数统计DexCount 下载</a></p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><pre><code>.
+├── dex-method-counts.jar
+├── tools.bat
+├── app-debug_dexcount.txt
+
+
+**dex-method-counts.jar**
+获得方法的可执行jar包
+
+**tools.bat**
+tools.bat：获取某一apk方法数的bat批处理命令
+</code></pre><h3 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h3><p>将某一个需要查看方法数的apk拖入tools.bat上，然后就会在 当前目录生成 一个名为 “${apk名称}_dexcount.txt”文件，打开该文件，即可以看到具体的方法分布。</p>
+<p>such as:</p>
+<pre><code>Processing D:\UserProfiles\Haiolv\Downloads\app-debug.apk
+Read in 64836 method IDs.
+&lt;root&gt;: 64836
+    &lt;default&gt;: 1
+    adStats: 12
+    android: 16841
+        accessibilityservice: 6
+        accounts: 5
+        animation: 12
+        app: 349
+        bluetooth: 3
+        content: 338
+.....
+</code></pre><p>如上，当将 app-debug.apk  拖入 tools.bat命令后，会在当前目录生成一个 名为 app-debug_dexcount.txt文件，打看我们可以看到该apk先总含有方法数为  64836，bomm..快超过 单个dex所允许的最大方法数了（65536），关于当apk方法数超过Short限制时，请查看 <a href="https://developer.android.com/studio/build/multidex.html" title="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">Configure Apps with Over 64K Methods</a></p>
+<h3 id="批处理命令详解"><a href="#批处理命令详解" class="headerlink" title="批处理命令详解"></a>批处理命令详解</h3><pre><code>echo 拖入apk包
+REM echo &quot;%~f1&quot;
+REM echo &quot;%~dp0&quot;
+REM echo %0
+pushd %~dp0 
+
+if exist ./dexcount.txt (
+    rmdir /s /q ./dexcount.txt
+)
+
+REM echo %~n1
+REM echo %~n1%_dexcount.txt
+REM pause
+
+java -jar ./dex-method-counts.jar &quot;%~f1&quot; &gt; ./%~n1%_dexcount.txt
+popd
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/14/Android的事件处理机制/" itemprop="url">
                   Android的事件处理机制
                 </a>
@@ -2345,7 +2513,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2362,7 +2530,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
