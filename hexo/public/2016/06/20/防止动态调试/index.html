@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,DexCount,Apk方法统计," />
+  <meta name="keywords" content="Android,动态调试," />
 
 
 
@@ -84,49 +84,18 @@
 
 
 
-<meta name="description" content="Android小工具–方法计数统计DexCountdownload:Android小工具–方法计数统计DexCount 下载
-目录结构.
-├── dex-method-counts.jar
-├── tools.bat
-├── app-debug_dexcount.txt
-
-
-**dex-method-counts.jar**
-获得方法的可执行jar包
-
-**tools.bat**
-tools.ba">
+<meta name="description" content="防止Apk被动态调式如何防止自己的apk被第三方动态调式呢？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android小工具--方法计数统计DexCount.md">
-<meta property="og:url" content="http://91yang.github.io/2016/06/17/Android小工具-方法计数统计DexCount-md/index.html">
+<meta property="og:title" content="防止动态调试.md">
+<meta property="og:url" content="http://91yang.github.io/2016/06/20/防止动态调试/index.html">
 <meta property="og:site_name" content="Glory Seeker">
-<meta property="og:description" content="Android小工具–方法计数统计DexCountdownload:Android小工具–方法计数统计DexCount 下载
-目录结构.
-├── dex-method-counts.jar
-├── tools.bat
-├── app-debug_dexcount.txt
-
-
-**dex-method-counts.jar**
-获得方法的可执行jar包
-
-**tools.bat**
-tools.ba">
-<meta property="og:updated_time" content="2016-06-17T05:22:19.983Z">
+<meta property="og:description" content="防止Apk被动态调式如何防止自己的apk被第三方动态调式呢？">
+<meta property="og:image" content="http://i.imgur.com/wfu7R40.jpg">
+<meta property="og:updated_time" content="2016-06-20T02:49:07.926Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android小工具--方法计数统计DexCount.md">
-<meta name="twitter:description" content="Android小工具–方法计数统计DexCountdownload:Android小工具–方法计数统计DexCount 下载
-目录结构.
-├── dex-method-counts.jar
-├── tools.bat
-├── app-debug_dexcount.txt
-
-
-**dex-method-counts.jar**
-获得方法的可执行jar包
-
-**tools.bat**
-tools.ba">
+<meta name="twitter:title" content="防止动态调试.md">
+<meta name="twitter:description" content="防止Apk被动态调式如何防止自己的apk被第三方动态调式呢？">
+<meta name="twitter:image" content="http://i.imgur.com/wfu7R40.jpg">
 
 
 
@@ -147,9 +116,9 @@ tools.ba">
 
 
 
-  <link rel="canonical" href="http://91yang.github.io/2016/06/17/Android小工具-方法计数统计DexCount-md/"/>
+  <link rel="canonical" href="http://91yang.github.io/2016/06/20/防止动态调试/"/>
 
-  <title> Android小工具--方法计数统计DexCount.md | Glory Seeker </title>
+  <title> 防止动态调试.md | Glory Seeker </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +258,7 @@ tools.ba">
             
             
               
-                Android小工具--方法计数统计DexCount.md
+                防止动态调试.md
               
             
           </h1>
@@ -301,8 +270,8 @@ tools.ba">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-17T11:59:52+08:00" content="2016-06-17">
-              2016-06-17
+            <time itemprop="dateCreated" datetime="2016-06-20T10:46:39+08:00" content="2016-06-20">
+              2016-06-20
             </time>
           </span>
 
@@ -360,51 +329,9 @@ tools.ba">
       
 
       
-        <h2 id="Android小工具–方法计数统计DexCount"><a href="#Android小工具–方法计数统计DexCount" class="headerlink" title="Android小工具–方法计数统计DexCount"></a>Android小工具–方法计数统计DexCount</h2><p>download:<a href="https://github.com/haiolv/tool-android" title="https://github.com/haiolv/tool-android" target="_blank" rel="external">Android小工具–方法计数统计DexCount 下载</a></p>
-<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><pre><code>.
-├── dex-method-counts.jar
-├── tools.bat
-├── app-debug_dexcount.txt
+        <h2 id="防止Apk被动态调式"><a href="#防止Apk被动态调式" class="headerlink" title="防止Apk被动态调式"></a>防止Apk被动态调式</h2><p>如何防止自己的apk被第三方动态调式呢？</p>
+<p><img src="http://i.imgur.com/wfu7R40.jpg" alt="dynamic-debug"></p>
 
-
-**dex-method-counts.jar**
-获得方法的可执行jar包
-
-**tools.bat**
-tools.bat：获取某一apk方法数的bat批处理命令
-</code></pre><h3 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h3><p>将某一个需要查看方法数的apk拖入tools.bat上，然后就会在 当前目录生成 一个名为 “${apk名称}_dexcount.txt”文件，打开该文件，即可以看到具体的方法分布。</p>
-<p>such as:</p>
-<pre><code>Processing D:\UserProfiles\Haiolv\Downloads\app-debug.apk
-Read in 64836 method IDs.
-&lt;root&gt;: 64836
-    &lt;default&gt;: 1
-    adStats: 12
-    android: 16841
-        accessibilityservice: 6
-        accounts: 5
-        animation: 12
-        app: 349
-        bluetooth: 3
-        content: 338
-.....
-</code></pre><p>如上，当将 app-debug.apk  拖入 tools.bat命令后，会在当前目录生成一个 名为 app-debug_dexcount.txt文件，打看我们可以看到该apk先总含有方法数为  64836，bomm..快超过 单个dex所允许的最大方法数了（65536），关于当apk方法数超过Short限制时，请查看 <a href="https://developer.android.com/studio/build/multidex.html" title="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">Configure Apps with Over 64K Methods</a></p>
-<h3 id="批处理命令详解"><a href="#批处理命令详解" class="headerlink" title="批处理命令详解"></a>批处理命令详解</h3><pre><code>echo 拖入apk包
-REM echo &quot;%~f1&quot;
-REM echo &quot;%~dp0&quot;
-REM echo %0
-pushd %~dp0 
-
-if exist ./dexcount.txt (
-    rmdir /s /q ./dexcount.txt
-)
-
-REM echo %~n1
-REM echo %~n1%_dexcount.txt
-REM pause
-
-java -jar ./dex-method-counts.jar &quot;%~f1&quot; &gt; ./%~n1%_dexcount.txt
-popd
-</code></pre>
       
     </div>
 
@@ -448,9 +375,7 @@ popd
           
             <a href="/tags/Android/" rel="tag">#Android</a>
           
-            <a href="/tags/DexCount/" rel="tag">#DexCount</a>
-          
-            <a href="/tags/Apk方法统计/" rel="tag">#Apk方法统计</a>
+            <a href="/tags/动态调试/" rel="tag">#动态调试</a>
           
         </div>
       
@@ -459,16 +384,16 @@ popd
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/14/Android的事件处理机制/" rel="next" title="Android的事件处理机制">
-                <i class="fa fa-chevron-left"></i> Android的事件处理机制
+              <a href="/2016/06/17/Android小工具-方法计数统计DexCount-md/" rel="next" title="Android小工具--方法计数统计DexCount.md">
+                <i class="fa fa-chevron-left"></i> Android小工具--方法计数统计DexCount.md
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/20/防止动态调试/" rel="prev" title="防止动态调试.md">
-                防止动态调试.md <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/22/Protocol-Buffer-运用/" rel="prev" title="Protocol Buffer 运用.md">
+                Protocol Buffer 运用.md <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -625,7 +550,7 @@ popd
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android小工具–方法计数统计DexCount"><span class="nav-number">1.</span> <span class="nav-text">Android小工具–方法计数统计DexCount</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">1.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具使用"><span class="nav-number">1.2.</span> <span class="nav-text">工具使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理命令详解"><span class="nav-number">1.3.</span> <span class="nav-text">批处理命令详解</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#防止Apk被动态调式"><span class="nav-number">1.</span> <span class="nav-text">防止Apk被动态调式</span></a></li></ol></div>
             
           </div>
         </section>

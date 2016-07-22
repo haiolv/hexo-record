@@ -1,0 +1,929 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Google Protocol Buffer,数据序列化," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Protocol BufferProtocol Buffer简介Protocol buffer是Google推出来的一个序列化结构化数据的库。其提供了一种在各个平台、各个编程语言之间传递结构序列化数据。假使，Android客户端（使用java语言）需要封装一些特定的数据给服务端（使用php或者go），此时通过protocol buffer 就可以将要传递的数据结构化，例如，在java平台就以对象形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Protocol Buffer 运用.md">
+<meta property="og:url" content="http://91yang.github.io/2016/07/22/Protocol-Buffer-运用/index.html">
+<meta property="og:site_name" content="Glory Seeker">
+<meta property="og:description" content="Protocol BufferProtocol Buffer简介Protocol buffer是Google推出来的一个序列化结构化数据的库。其提供了一种在各个平台、各个编程语言之间传递结构序列化数据。假使，Android客户端（使用java语言）需要封装一些特定的数据给服务端（使用php或者go），此时通过protocol buffer 就可以将要传递的数据结构化，例如，在java平台就以对象形">
+<meta property="og:image" content="http://i.imgur.com/pH5QVAC.png">
+<meta property="og:image" content="http://i.imgur.com/EAVVcp9.png">
+<meta property="og:updated_time" content="2016-07-22T09:05:37.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Protocol Buffer 运用.md">
+<meta name="twitter:description" content="Protocol BufferProtocol Buffer简介Protocol buffer是Google推出来的一个序列化结构化数据的库。其提供了一种在各个平台、各个编程语言之间传递结构序列化数据。假使，Android客户端（使用java语言）需要封装一些特定的数据给服务端（使用php或者go），此时通过protocol buffer 就可以将要传递的数据结构化，例如，在java平台就以对象形">
+<meta name="twitter:image" content="http://i.imgur.com/pH5QVAC.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://91yang.github.io/2016/07/22/Protocol-Buffer-运用/"/>
+
+  <title> Protocol Buffer 运用.md | Glory Seeker </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Glory Seeker</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Make progress step by step everyday！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Protocol Buffer 运用.md
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-22T17:03:39+08:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Protocol-Buffer"><a href="#Protocol-Buffer" class="headerlink" title="Protocol Buffer"></a>Protocol Buffer</h1><h2 id="Protocol-Buffer简介"><a href="#Protocol-Buffer简介" class="headerlink" title="Protocol Buffer简介"></a>Protocol Buffer简介</h2><p>Protocol buffer是Google推出来的一个序列化结构化数据的库。其提供了一种在各个平台、各个编程语言之间传递结构序列化数据。假使，Android客户端（使用java语言）需要封装一些特定的数据给服务端（使用php或者go），此时通过protocol buffer 就可以将要传递的数据结构化，例如，在java平台就以对象形式，通过 Build模式封装数据等。</p>
+<blockquote>
+<ul>
+<li><p>Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.</p>
+</li>
+<li><p>Protocol buffers are Google’s language-neutral, platform-neutral, extensible mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages.</p>
+</li>
+</ul>
+</blockquote>
+<p>官方地址: <a href="https://developers.google.com/protocol-buffers/" title="https://developers.google.com/protocol-buffers/" target="_blank" rel="external">https://developers.google.com/protocol-buffers/</a></p>
+<p>GitHub地址：<a href="https://github.com/google/protobuf" title="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a></p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>例如，现在要在客户端和服务端传递 Person 数据，其包含 id、name、email三个属性。</p>
+<p>protocol 协议（各个平台共用）:</p>
+<pre><code>message Person {
+  required string name = 1;
+  required int32 id = 2;
+  optional string email = 3;
+}
+</code></pre><p>然后通过 proto.ext编译，java平台：</p>
+<pre><code>Person john = Person.newBuilder()
+    .setId(1234)
+    .setName(&quot;John Doe&quot;)
+    .setEmail(&quot;jdoe@example.com&quot;)
+    .build();
+output = new FileOutputStream(args[0]);
+john.writeTo(output);
+</code></pre><p>ios平台：</p>
+<pre><code>Person john;
+fstream input(argv[1],
+    ios::in | ios::binary);
+john.ParseFromIstream(&amp;input);
+id = john.id();
+name = john.name();
+email = john.email();
+</code></pre><h2 id="Protocol-Buffer运用"><a href="#Protocol-Buffer运用" class="headerlink" title="Protocol Buffer运用"></a>Protocol Buffer运用</h2><p>本篇文章旨在记录Protocol 库的使用 以及proto.ext即相关jar包的编译。</p>
+<p>使用protobuf，需要两个部分：</p>
+<ul>
+<li>install the protocol compiler ，例如安装proto.exe（以windows平台为例，如下若不特殊说明，都以windows平台作说明），其用于编译 .proto文件；</li>
+<li>install the protobuf runtime for your chosen programming language,即安装所选择语言对应的支持库。例如，正对java平台，你需要 依赖 protobuf-java-3.0.0-beta-2.jar</li>
+</ul>
+<blockquote>
+<p>To install protobuf, you need to install the protocol compiler (used to compile .proto files) and the protobuf runtime for your chosen programming language.</p>
+</blockquote>
+<p>注意：protobuf的compiler和runtime library版本要对应起来。</p>
+<p>Protocol Buffer使用一般包含以下几个步骤。</p>
+<h3 id="1-proto-exe可执行文件的获取-Protocol-Compiler-Installation"><a href="#1-proto-exe可执行文件的获取-Protocol-Compiler-Installation" class="headerlink" title="1. proto.exe可执行文件的获取(Protocol Compiler Installation)"></a>1. proto.exe可执行文件的获取(Protocol Compiler Installation)</h3><p>proto compiler是干什么的？</p>
+<p>其就是用来 对 .proto文件进行编译的。</p>
+<p>maven仓库获取地址：<a href="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" title="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" target="_blank" rel="external">protocol compiler protocol可执行文件</a></p>
+<p>当前 protocol compiler使用C++来写的，如果当前非C++的使用者，最简单的办法就是从官网上下载对应的文件<br><a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf releases 下载</a>。</p>
+<p>当然你也可以自己编译 protobuf，具体源码也可以在 <a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf 源码 下载</a>。</p>
+<h3 id="2-生成-对应语言-proto-运行时依赖库-Protobuf-Runtime-Installation"><a href="#2-生成-对应语言-proto-运行时依赖库-Protobuf-Runtime-Installation" class="headerlink" title="2. 生成 对应语言 proto 运行时依赖库(Protobuf Runtime Installation)"></a>2. 生成 对应语言 proto 运行时依赖库(Protobuf Runtime Installation)</h3><p>以java平台为例，生成对应的依赖库，也就是 支持 通过 proto.exe编译 用户 .proto文件生成的java文件的library jar包。</p>
+<p>具体的 runntime library源码，可在 <a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf releases版本目录</a>进行下载。</p>
+<p>具体语言对应的 结构化序列化过程都在这个 依赖库中。</p>
+<p>下载java平台相关的 protocol runtime library 具体可参考 <a href="https://github.com/google/protobuf/tree/master/java" title="https://github.com/google/protobuf/tree/master/java" target="_blank" rel="external">Protobuf Runtime Installation for java</a></p>
+<p>因为，现在google针对java平台的proto runntime是通过maven进行编译构建的，所以，建议以maven的形式完成对proto。</p>
+<ul>
+<li><p>step1: 下载protobuf runtime library 源码（注意要和之前编译好的 proto.exe版本一致）</p>
+<p>  具体的 runntime library源码，可在 <a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf releases版本目录</a>进行下载。</p>
+<p>  <img src="http://i.imgur.com/pH5QVAC.png" alt="download proto"></p>
+</li>
+</ul>
+<ul>
+<li><p>step2:解压，并且进入java目录，然后通过命令行 进入对应java目录，并将之前proto.exe放置在 ../src下。</p>
+<p> <img src="http://i.imgur.com/EAVVcp9.png" alt="proto directory"></p>
+<p> 然后通过命令行进入java目录，此时需要注意几点：</p>
+<ul>
+<li><p>检查proto compiler 二进制文件版本</p>
+<pre><code>D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src&gt;protoc --version
+
+libprotoc 3.0.0
+</code></pre></li>
+<li><p>将之前已编译好或者下载好的对应版本的proto.exe放置在 ../src下，如下查询记录</p>
+<pre><code>D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\java&gt;
+D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\java&gt;cd ../src
+
+D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src&gt;dir
+ 驱动器 D 中的卷是 Document
+ 卷的序列号是 D4A2-99E4
+
+ D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src 的目录
+
+2016/07/22  11:13    &lt;DIR&gt;          .
+2016/07/22  11:13    &lt;DIR&gt;          ..
+2016/07/22  11:04    &lt;DIR&gt;          google
+2016/07/20  08:23            50,260 Makefile.am
+2016/07/20  08:24           819,873 Makefile.in
+2016/07/19  05:39         4,060,160 protoc.exe
+2016/07/02  04:43             7,195 README.md
+2016/07/22  11:04    &lt;DIR&gt;          solaris
+               4 个文件      4,937,488 字节
+               4 个目录 100,164,812,800 可用字节
+
+D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src&gt;
+</code></pre></li>
+<li><p>需要将java目录下maven的构建脚本pom.xml中添加编码格式</p>
+<p>  pom.xml类似Ant的build.xml或者gradle的build.gradle配置脚本文件。</p>
+<p>  maven构建项目</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* ，否则构建会采用操作系统默认的编码，Windows平台中文的话是GBK，而我们在Android平台采用的是UTF_8。添加部分代码如下：
+
+        &lt;properties&gt; 
+              &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt; 
+          &lt;/properties&gt;
+
+    ![](http://i.imgur.com/q5WtQgd.png)
+
+reference：[Maven POM Reference](http://maven.apache.org/pom.html &quot;http://maven.apache.org/pom.html&quot;)
+</code></pre><ul>
+<li><p>step3:检查当前是否已安装maven，如未安装，请下载安装(注意需要安装JDK1.7及其以上版本)</p>
+<p>  maven下载地址(目前最新版本3.3.9)，<a href="http://maven.apache.org/" title="maven下载地址" target="_blank" rel="external">http://maven.apache.org/</a>。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。</p>
+<p>  可以通过 </p>
+<pre><code>mvn --version
+</code></pre><p>  来检查 maven是否正确安装以及其版本。</p>
+</li>
+<li><p>step4:Run the tests（运行测试）</p>
+</li>
+</ul>
+<p>Notice:</p>
+<ul>
+<li><p>step5:构建生成jar包</p>
+<p>  通过命令行，生成对应的jar</p>
+<pre><code>mvn package
+</code></pre><p>  [[jar 图]]</p>
+<p>  The .jar will be placed in the “target” directory.</p>
+<blockquote>
+<p>mvn package:The typical invocation for building a Maven project uses a Maven life cycle phase<br>reference: <a href="http://maven.apache.org/run.html" title="http://maven.apache.org/run.html" target="_blank" rel="external">http://maven.apache.org/run.html</a></p>
+</blockquote>
+</li>
+<li><p>step6:将生成的jar包安装到本地maven仓库中（可选）</p>
+<p>  通过命令行，生成对应的jar</p>
+<pre><code>mvn install
+</code></pre><blockquote>
+<p>mvn install:Just creating the package and installing it in the local repository for re-use from other projects can be done with</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h3><p>经过上述两个步骤，我们拿到了 protoc.exe以及 对应版本的 protobuf的支持库 protobuf-java-3.0.0-beta-4.jar。</p>
+<ul>
+<li><p>step1 : Defining Your Protocol Format(定义要传递的数据机构的协议格式)</p>
+<p>  定义业务要传递的数据协议格式，类似定义xml文件格式一样，其相当于定义要传递的数据的结构。但是相比xml定义，proto格式更简单易懂，并且会提供出对数据操作的对应接口。简单来说，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
+<p>  .proto示例(addressbook.proto)：</p>
+</li>
+</ul>
+<pre><code>syntax = &quot;proto3&quot;;
+package tutorial;
+
+option java_package = &quot;com.example.tutorial&quot;;
+option java_outer_classname = &quot;AddressBookProtos&quot;;
+// [END java_declaration]
+
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4;
+}
+
+message AddressBook {
+  repeated Person people = 1;
+}
+</code></pre><ul>
+<li><p>step2: 编译生成对应语言的api</p>
+<p>  在命令行执行：</p>
+<pre><code>protoc -I=$SRC_DIR --java_out=$DST_DIR $SRC_DIR/addressbook.proto
+</code></pre><p>  SRC_DIR：where your application’s source code lives – the current directory is used if you don’t provide a value；</p>
+<p>  DST_DIR：where you want the generated code to go; often the same as $SRC_DIR；</p>
+<p>  java_out：Because you want Java classes, you use the –java_out option – similar options are provided for other supported languages.</p>
+</li>
+</ul>
+<pre><code>例如，在f盘将上述的proto写入一个名叫test.proto文件，然后执行：
+
+    F:\&gt;D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src\protoc.exe -I . --java_out=. .\test.proto
+
+
+在F盘下生成文件：F:\com\example\tutorial\AddressBookProtos.java
+
+
+
+    // Generated by the protocol buffer compiler.  DO NOT EDIT!
+    // source: addres.proto
+
+    package com.example.tutorial;
+
+    public final class AddressBookProtos {
+      private AddressBookProtos() {}
+      public static void registerAllExtensions(
+          com.google.protobuf.ExtensionRegistryLite registry) {
+      }
+
+      public static void registerAllExtensions(
+          com.google.protobuf.ExtensionRegistry registry) {
+        registerAllExtensions(
+            (com.google.protobuf.ExtensionRegistryLite) registry);
+      }
+
+      public static com.google.protobuf.Descriptors.FileDescriptor
+          getDescriptor() {
+        return descriptor;
+      }
+      private static  com.google.protobuf.Descriptors.FileDescriptor
+          descriptor;
+      static {
+        java.lang.String[] descriptorData = {
+          &quot;\n\014addres.proto\022\010tutorialB)\n\024com.example.&quot; +
+          &quot;tutorialB\021AddressBookProtosb\006proto3&quot;
+        };
+        com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+            new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+              public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                  com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+              }
+            };
+        com.google.protobuf.Descriptors.FileDescriptor
+          .internalBuildGeneratedFileFrom(descriptorData,
+            new com.google.protobuf.Descriptors.FileDescriptor[] {
+            }, assigner);
+      }
+
+      // @@protoc_insertion_point(outer_class_scope)
+    }
+</code></pre><p>然后对数据进行操作，具体的 proto语法可以请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="haiolv WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="haiolv Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Google-Protocol-Buffer/" rel="tag">#Google Protocol Buffer</a>
+          
+            <a href="/tags/数据序列化/" rel="tag">#数据序列化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/防止动态调试/" rel="next" title="防止动态调试.md">
+                <i class="fa fa-chevron-left"></i> 防止动态调试.md
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/22/Groovy learner/" rel="prev" title="Groovy learner.md">
+                Groovy learner.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.jpg"
+               alt="haiolv" />
+          <p class="site-author-name" itemprop="name">haiolv</p>
+          <p class="site-description motion-element" itemprop="description">Just do it</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haiolv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://developer.android.com/" target="_blank" title="Android 官网">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Android 官网
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cstsinghua.github.io/" title="Atypical programmer" target="_blank">Atypical programmer</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hellokugo.github.io/" title="Hellokugo" target="_blank">Hellokugo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://aso210.github.io/" title="Aso210" target="_blank">Aso210</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffer"><span class="nav-number">1.</span> <span class="nav-text">Protocol Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol-Buffer简介"><span class="nav-number">1.1.</span> <span class="nav-text">Protocol Buffer简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#举例说明"><span class="nav-number">1.1.1.</span> <span class="nav-text">举例说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol-Buffer运用"><span class="nav-number">1.2.</span> <span class="nav-text">Protocol Buffer运用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-proto-exe可执行文件的获取-Protocol-Compiler-Installation"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. proto.exe可执行文件的获取(Protocol Compiler Installation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-生成-对应语言-proto-运行时依赖库-Protobuf-Runtime-Installation"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 生成 对应语言 proto 运行时依赖库(Protobuf Runtime Installation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 使用</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haiolv</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

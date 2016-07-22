@@ -258,6 +258,773 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/22/Groovy learner/" itemprop="url">
+                  Groovy learner.md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-22T17:03:39+08:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Groovy-learner"><a href="#Groovy-learner" class="headerlink" title="Groovy learner"></a>Groovy learner</h1><h2 id="gradle插件开发入门"><a href="#gradle插件开发入门" class="headerlink" title="gradle插件开发入门"></a>gradle插件开发入门</h2><h3 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h3><ul>
+<li><strong>step1</strong>: 新建一个Android project，之后，新建一个Android Module项目，类型选择Android Library，然后将新建的Module中除了build.gradle文件外的其余文件全都删除，并删除build.gradle文件中的所有内容。</li>
+<li><strong>step2</strong>: 在刚新建的Module中新建文件夹 <strong>src</strong>，接着在src文件目录下新建main文件夹，在main目录下新建 <strong>groovy</strong> 目录。除此在main目录下新建groovy目录外，你还需要在main目录下新建 <strong>resources</strong> 目录。这时候groovy文件夹会被Android识别为groovy源码目录，同理resources目录会被自动识别为资源文件夹。</li>
+<li><strong>step3</strong>: 在groovy目录下新建项目包名，如同新建Java包名那样。resources目录下新建文件夹 <strong>META-INF</strong>，META-INF文件夹下新建 <strong>gradle-plugins</strong> 文件夹。</li>
+</ul>
+<p>按照上述步骤操作完，你会看到如下目录：</p>
+<p><img src="http://i.imgur.com/R8P4HIv.png" alt="gradle_directory"></p>
+<p>从上面开发步骤中，我们得知，在 src/main 下新建groovy目录，代表我们将通过groovy来开发工程，resources代表资源目录。</p>
+<p>接下来，我们引用开发gradle插件的apk，并将其在build.gradle中进行配置。</p>
+<h4 id="配置-插件Module的build-gradle"><a href="#配置-插件Module的build-gradle" class="headerlink" title="配置 插件Module的build.gradle"></a>配置 插件Module的build.gradle</h4><p>打开Module的build.gradle</p>
+<pre><code>apply plugin: &apos;groovy&apos;
+apply plugin: &apos;maven&apos;
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+</code></pre><p>从maven中心仓库中引入 gradleApi()以及localGroovy()。</p>
+<h4 id="撰写对应的插件入口"><a href="#撰写对应的插件入口" class="headerlink" title="撰写对应的插件入口"></a>撰写对应的插件入口</h4><p>在 src/main/groovy 目录下新建 groovy类的包名，如上图 com/haio/groovy,然后新建 PluginImpl.groovy groovy类文件。</p>
+<pre><code>package com.haio.groovy
+
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+public class PluginImpl implements Plugin&lt;Project&gt;{
+
+    @Override
+    void apply(Project project) {
+        project.task(&quot;testPlugin&quot;) &lt;&lt; {
+            println &quot;hello gradle plugin&quot;
+        }
+    }
+}
+</code></pre><p>注意：如果需要自己修改，将包名替换成自己写的。</p>
+<h4 id="映射入口文件"><a href="#映射入口文件" class="headerlink" title="映射入口文件"></a>映射入口文件</h4><p>在 resources/META-INF/gradle-plugins 目录下新建一个properties文件，并将其命名为你到时候想在 其他项目中引用的名称，例如，这里命名成 plugin.test.properties，并在其输入：</p>
+<pre><code>implementation-class=com.haio.groovy.PluginImpl
+</code></pre><p>注意： </p>
+<ul>
+<li>该文件的命名就是你只有使用插件的名字，这里命名为plugin.test.properties</li>
+<li>implementation-class中引用的类的路径要和 groovy中写的文件一一对应起来，注意包名需要替换为你自己的包名。</li>
+</ul>
+<p>此去经年，就完成了一简单的gradle插件，这里面创建了一个 叫 testPlugin的task,执行该 task 会输出 “hello gradle plugin”</p>
+<h3 id="发布该插件到-本地-仓库"><a href="#发布该插件到-本地-仓库" class="headerlink" title="发布该插件到 本地 仓库"></a>发布该插件到 本地 仓库</h3><p>接着，我们需要将插件发布到maven中央仓库，当然此时，我们先将插件发布到本地仓库进行测试，在module项目下的buidl.gradle文件中新加入发布的代码。</p>
+<pre><code>group=&apos;cn.haio.gradle.plugin&apos;
+version=&apos;1.0.0&apos;
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(&apos;../repo&apos;))
+        }
+    }
+}
+</code></pre><p>完整的 gradleLibarar/build.gradle中的内容如下：</p>
+<pre><code>apply plugin: &apos;groovy&apos;
+apply plugin: &apos;maven&apos;
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+group=&apos;cn.haio.gradle.plugin&apos;
+version=&apos;1.0.0&apos;
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(&apos;../repo&apos;))
+        }
+    }
+}
+</code></pre><p>上面中定义的 <strong>group</strong> 和 <strong>version</strong> 的定义会被使用，作为在maven仓库的定位坐标的一部分，group会被作为坐标的groupId，version会被作为坐标的version，而坐标的artifactId组成即当前 <strong>module</strong> 名，我们让其取一个别名moduleName。然后maven本地仓库的目录就是当前项目目录下的repo目录。</p>
+<p>此后，在其他Module中引用遵从如下格式</p>
+<pre><code>group:artifactId:version
+</code></pre><p>这时候，同步更新工程，右侧的gradle Toolbar就会在module下多出一个task。</p>
+<p>[[upload]]<br><img src="http://i.imgur.com/CPEYKXy.png" alt="upload"></p>
+<p>然后，点击uploadArchives这个Task，就会在项目下多出一个repo目录，里面存着这个gradle插件。</p>
+<p>【【repo】】<br><img src="http://i.imgur.com/HbIkeEn.png" alt="repo"></p>
+<h3 id="使用发布到本地仓库的gradle插件"><a href="#使用发布到本地仓库的gradle插件" class="headerlink" title="使用发布到本地仓库的gradle插件"></a>使用发布到本地仓库的gradle插件</h3><ul>
+<li><p><strong>step1:</strong> 在当前工程的app (即准本引用该插件的Module)的android项目下的gradle.build的文件中加入 dependencies。</p>
+<pre><code>buildscript {
+    repositories {
+        maven {
+            url uri(&apos;../repo&apos;)
+        }
+    }
+    dependencies {
+        classpath &apos;cn.haio.gradle.plugin:gradlelibrary:1.0.0&apos;
+    }
+}
+</code></pre></li>
+<li><p><strong>step2:</strong> 使用该task,在gradle.build 中apply</p>
+<pre><code>apply plugin: &apos;plugin.test&apos;
+</code></pre></li>
+</ul>
+<p>apply plugin后面引号内的名字就是前文plugin.test.properties文件的文件名。而class path后面引号里的内容，就是上面grade中定义的group，version以及moduleName所共同决定的，和maven是一样的。</p>
+<p>完整的使用例子如下：</p>
+<pre><code>apply plugin: &apos;com.android.application&apos;
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion &quot;23.0.2&quot;
+
+    defaultConfig {
+        applicationId &quot;com.haio.gradle&quot;
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName &quot;1.0&quot;
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
+    testCompile &apos;junit:junit:4.12&apos;
+    compile &apos;com.android.support:appcompat-v7:23.1.1&apos;
+}
+
+buildscript {
+    repositories {
+        maven {
+            url uri(&apos;../repo&apos;)
+        }
+    }
+    dependencies {
+        classpath &apos;cn.haio.gradle.plugin:gradlelibrary:1.0.0&apos;
+    }
+}
+apply plugin: &apos;plugin.test&apos;
+</code></pre><p>同步一下gradle，右侧app下other分类下就会多出一个testTask，双击执行这个Task，控制台就会输出刚才我们输入的字符串。<br>[[task]]</p>
+<p><img src="http://i.imgur.com/m7cvXwg.png" alt="task"></p>
+<pre><code>....
+Incremental java compilation is an incubating feature.
+:app:testPlugin
+hello gradle plugin
+
+BUILD SUCCESSFUL
+
+Total time: 4.049 secs
+15:38:39: External task execution finished &apos;testPlugin&apos;.
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/22/Protocol-Buffer-运用/" itemprop="url">
+                  Protocol Buffer 运用.md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-22T17:03:39+08:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Protocol-Buffer"><a href="#Protocol-Buffer" class="headerlink" title="Protocol Buffer"></a>Protocol Buffer</h1><h2 id="Protocol-Buffer简介"><a href="#Protocol-Buffer简介" class="headerlink" title="Protocol Buffer简介"></a>Protocol Buffer简介</h2><p>Protocol buffer是Google推出来的一个序列化结构化数据的库。其提供了一种在各个平台、各个编程语言之间传递结构序列化数据。假使，Android客户端（使用java语言）需要封装一些特定的数据给服务端（使用php或者go），此时通过protocol buffer 就可以将要传递的数据结构化，例如，在java平台就以对象形式，通过 Build模式封装数据等。</p>
+<blockquote>
+<ul>
+<li><p>Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.</p>
+</li>
+<li><p>Protocol buffers are Google’s language-neutral, platform-neutral, extensible mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages.</p>
+</li>
+</ul>
+</blockquote>
+<p>官方地址: <a href="https://developers.google.com/protocol-buffers/" title="https://developers.google.com/protocol-buffers/" target="_blank" rel="external">https://developers.google.com/protocol-buffers/</a></p>
+<p>GitHub地址：<a href="https://github.com/google/protobuf" title="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a></p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>例如，现在要在客户端和服务端传递 Person 数据，其包含 id、name、email三个属性。</p>
+<p>protocol 协议（各个平台共用）:</p>
+<pre><code>message Person {
+  required string name = 1;
+  required int32 id = 2;
+  optional string email = 3;
+}
+</code></pre><p>然后通过 proto.ext编译，java平台：</p>
+<pre><code>Person john = Person.newBuilder()
+    .setId(1234)
+    .setName(&quot;John Doe&quot;)
+    .setEmail(&quot;jdoe@example.com&quot;)
+    .build();
+output = new FileOutputStream(args[0]);
+john.writeTo(output);
+</code></pre><p>ios平台：</p>
+<pre><code>Person john;
+fstream input(argv[1],
+    ios::in | ios::binary);
+john.ParseFromIstream(&amp;input);
+id = john.id();
+name = john.name();
+email = john.email();
+</code></pre><h2 id="Protocol-Buffer运用"><a href="#Protocol-Buffer运用" class="headerlink" title="Protocol Buffer运用"></a>Protocol Buffer运用</h2><p>本篇文章旨在记录Protocol 库的使用 以及proto.ext即相关jar包的编译。</p>
+<p>使用protobuf，需要两个部分：</p>
+<ul>
+<li>install the protocol compiler ，例如安装proto.exe（以windows平台为例，如下若不特殊说明，都以windows平台作说明），其用于编译 .proto文件；</li>
+<li>install the protobuf runtime for your chosen programming language,即安装所选择语言对应的支持库。例如，正对java平台，你需要 依赖 protobuf-java-3.0.0-beta-2.jar</li>
+</ul>
+<blockquote>
+<p>To install protobuf, you need to install the protocol compiler (used to compile .proto files) and the protobuf runtime for your chosen programming language.</p>
+</blockquote>
+<p>注意：protobuf的compiler和runtime library版本要对应起来。</p>
+<p>Protocol Buffer使用一般包含以下几个步骤。</p>
+<h3 id="1-proto-exe可执行文件的获取-Protocol-Compiler-Installation"><a href="#1-proto-exe可执行文件的获取-Protocol-Compiler-Installation" class="headerlink" title="1. proto.exe可执行文件的获取(Protocol Compiler Installation)"></a>1. proto.exe可执行文件的获取(Protocol Compiler Installation)</h3><p>proto compiler是干什么的？</p>
+<p>其就是用来 对 .proto文件进行编译的。</p>
+<p>maven仓库获取地址：<a href="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" title="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" target="_blank" rel="external">protocol compiler protocol可执行文件</a></p>
+<p>当前 protocol compiler使用C++来写的，如果当前非C++的使用者，最简单的办法就是从官网上下载对应的文件<br><a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf releases 下载</a>。</p>
+<p>当然你也可以自己编译 protobuf，具体源码也可以在 <a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf 源码 下载</a>。</p>
+<h3 id="2-生成-对应语言-proto-运行时依赖库-Protobuf-Runtime-Installation"><a href="#2-生成-对应语言-proto-运行时依赖库-Protobuf-Runtime-Installation" class="headerlink" title="2. 生成 对应语言 proto 运行时依赖库(Protobuf Runtime Installation)"></a>2. 生成 对应语言 proto 运行时依赖库(Protobuf Runtime Installation)</h3><p>以java平台为例，生成对应的依赖库，也就是 支持 通过 proto.exe编译 用户 .proto文件生成的java文件的library jar包。</p>
+<p>具体的 runntime library源码，可在 <a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf releases版本目录</a>进行下载。</p>
+<p>具体语言对应的 结构化序列化过程都在这个 依赖库中。</p>
+<p>下载java平台相关的 protocol runtime library 具体可参考 <a href="https://github.com/google/protobuf/tree/master/java" title="https://github.com/google/protobuf/tree/master/java" target="_blank" rel="external">Protobuf Runtime Installation for java</a></p>
+<p>因为，现在google针对java平台的proto runntime是通过maven进行编译构建的，所以，建议以maven的形式完成对proto。</p>
+<ul>
+<li><p>step1: 下载protobuf runtime library 源码（注意要和之前编译好的 proto.exe版本一致）</p>
+<p>  具体的 runntime library源码，可在 <a href="https://github.com/google/protobuf/releases" title="https://github.com/google/protobuf/releases" target="_blank" rel="external">protobuf releases版本目录</a>进行下载。</p>
+<p>  <img src="http://i.imgur.com/pH5QVAC.png" alt="download proto"></p>
+</li>
+</ul>
+<ul>
+<li><p>step2:解压，并且进入java目录，然后通过命令行 进入对应java目录，并将之前proto.exe放置在 ../src下。</p>
+<p> <img src="http://i.imgur.com/EAVVcp9.png" alt="proto directory"></p>
+<p> 然后通过命令行进入java目录，此时需要注意几点：</p>
+<ul>
+<li><p>检查proto compiler 二进制文件版本</p>
+<pre><code>D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src&gt;protoc --version
+
+libprotoc 3.0.0
+</code></pre></li>
+<li><p>将之前已编译好或者下载好的对应版本的proto.exe放置在 ../src下，如下查询记录</p>
+<pre><code>D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\java&gt;
+D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\java&gt;cd ../src
+
+D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src&gt;dir
+ 驱动器 D 中的卷是 Document
+ 卷的序列号是 D4A2-99E4
+
+ D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src 的目录
+
+2016/07/22  11:13    &lt;DIR&gt;          .
+2016/07/22  11:13    &lt;DIR&gt;          ..
+2016/07/22  11:04    &lt;DIR&gt;          google
+2016/07/20  08:23            50,260 Makefile.am
+2016/07/20  08:24           819,873 Makefile.in
+2016/07/19  05:39         4,060,160 protoc.exe
+2016/07/02  04:43             7,195 README.md
+2016/07/22  11:04    &lt;DIR&gt;          solaris
+               4 个文件      4,937,488 字节
+               4 个目录 100,164,812,800 可用字节
+
+D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src&gt;
+</code></pre></li>
+<li><p>需要将java目录下maven的构建脚本pom.xml中添加编码格式</p>
+<p>  pom.xml类似Ant的build.xml或者gradle的build.gradle配置脚本文件。</p>
+<p>  maven构建项目</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* ，否则构建会采用操作系统默认的编码，Windows平台中文的话是GBK，而我们在Android平台采用的是UTF_8。添加部分代码如下：
+
+        &lt;properties&gt; 
+              &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt; 
+          &lt;/properties&gt;
+
+    ![](http://i.imgur.com/q5WtQgd.png)
+
+reference：[Maven POM Reference](http://maven.apache.org/pom.html &quot;http://maven.apache.org/pom.html&quot;)
+</code></pre><ul>
+<li><p>step3:检查当前是否已安装maven，如未安装，请下载安装(注意需要安装JDK1.7及其以上版本)</p>
+<p>  maven下载地址(目前最新版本3.3.9)，<a href="http://maven.apache.org/" title="maven下载地址" target="_blank" rel="external">http://maven.apache.org/</a>。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。</p>
+<p>  可以通过 </p>
+<pre><code>mvn --version
+</code></pre><p>  来检查 maven是否正确安装以及其版本。</p>
+</li>
+<li><p>step4:Run the tests（运行测试）</p>
+</li>
+</ul>
+<p>Notice:</p>
+<ul>
+<li><p>step5:构建生成jar包</p>
+<p>  通过命令行，生成对应的jar</p>
+<pre><code>mvn package
+</code></pre><p>  [[jar 图]]</p>
+<p>  The .jar will be placed in the “target” directory.</p>
+<blockquote>
+<p>mvn package:The typical invocation for building a Maven project uses a Maven life cycle phase<br>reference: <a href="http://maven.apache.org/run.html" title="http://maven.apache.org/run.html" target="_blank" rel="external">http://maven.apache.org/run.html</a></p>
+</blockquote>
+</li>
+<li><p>step6:将生成的jar包安装到本地maven仓库中（可选）</p>
+<p>  通过命令行，生成对应的jar</p>
+<pre><code>mvn install
+</code></pre><blockquote>
+<p>mvn install:Just creating the package and installing it in the local repository for re-use from other projects can be done with</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h3><p>经过上述两个步骤，我们拿到了 protoc.exe以及 对应版本的 protobuf的支持库 protobuf-java-3.0.0-beta-4.jar。</p>
+<ul>
+<li><p>step1 : Defining Your Protocol Format(定义要传递的数据机构的协议格式)</p>
+<p>  定义业务要传递的数据协议格式，类似定义xml文件格式一样，其相当于定义要传递的数据的结构。但是相比xml定义，proto格式更简单易懂，并且会提供出对数据操作的对应接口。简单来说，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
+<p>  .proto示例(addressbook.proto)：</p>
+</li>
+</ul>
+<pre><code>syntax = &quot;proto3&quot;;
+package tutorial;
+
+option java_package = &quot;com.example.tutorial&quot;;
+option java_outer_classname = &quot;AddressBookProtos&quot;;
+// [END java_declaration]
+
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4;
+}
+
+message AddressBook {
+  repeated Person people = 1;
+}
+</code></pre><ul>
+<li><p>step2: 编译生成对应语言的api</p>
+<p>  在命令行执行：</p>
+<pre><code>protoc -I=$SRC_DIR --java_out=$DST_DIR $SRC_DIR/addressbook.proto
+</code></pre><p>  SRC_DIR：where your application’s source code lives – the current directory is used if you don’t provide a value；</p>
+<p>  DST_DIR：where you want the generated code to go; often the same as $SRC_DIR；</p>
+<p>  java_out：Because you want Java classes, you use the –java_out option – similar options are provided for other supported languages.</p>
+</li>
+</ul>
+<pre><code>例如，在f盘将上述的proto写入一个名叫test.proto文件，然后执行：
+
+    F:\&gt;D:\UserProfiles\Haiolv\Downloads\protobuf-3.0.0-beta-4\src\protoc.exe -I . --java_out=. .\test.proto
+
+
+在F盘下生成文件：F:\com\example\tutorial\AddressBookProtos.java
+
+
+
+    // Generated by the protocol buffer compiler.  DO NOT EDIT!
+    // source: addres.proto
+
+    package com.example.tutorial;
+
+    public final class AddressBookProtos {
+      private AddressBookProtos() {}
+      public static void registerAllExtensions(
+          com.google.protobuf.ExtensionRegistryLite registry) {
+      }
+
+      public static void registerAllExtensions(
+          com.google.protobuf.ExtensionRegistry registry) {
+        registerAllExtensions(
+            (com.google.protobuf.ExtensionRegistryLite) registry);
+      }
+
+      public static com.google.protobuf.Descriptors.FileDescriptor
+          getDescriptor() {
+        return descriptor;
+      }
+      private static  com.google.protobuf.Descriptors.FileDescriptor
+          descriptor;
+      static {
+        java.lang.String[] descriptorData = {
+          &quot;\n\014addres.proto\022\010tutorialB)\n\024com.example.&quot; +
+          &quot;tutorialB\021AddressBookProtosb\006proto3&quot;
+        };
+        com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+            new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+              public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                  com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+              }
+            };
+        com.google.protobuf.Descriptors.FileDescriptor
+          .internalBuildGeneratedFileFrom(descriptorData,
+            new com.google.protobuf.Descriptors.FileDescriptor[] {
+            }, assigner);
+      }
+
+      // @@protoc_insertion_point(outer_class_scope)
+    }
+</code></pre><p>然后对数据进行操作，具体的 proto语法可以请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/20/防止动态调试/" itemprop="url">
+                  防止动态调试.md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-20T10:46:39+08:00" content="2016-06-20">
+              2016-06-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="防止Apk被动态调式"><a href="#防止Apk被动态调式" class="headerlink" title="防止Apk被动态调式"></a>防止Apk被动态调式</h2><p>如何防止自己的apk被第三方动态调式呢？</p>
+<p><img src="http://i.imgur.com/wfu7R40.jpg" alt="dynamic-debug"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/17/Android小工具-方法计数统计DexCount-md/" itemprop="url">
                   Android小工具--方法计数统计DexCount.md
                 </a>
@@ -2513,7 +3280,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2530,7 +3297,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
