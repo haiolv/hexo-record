@@ -11,7 +11,7 @@ categories: [文本编辑,MarkDown] # 配置categories
 这里对于简单的语法就不做阐述了，由各位客官自行揣摩，本篇小文主要是正对两个方面做一记录和阐述：
 
 * [MarkDown 表格语法](#markdown_table)；
-* [MarkDown实现页内跳转](#markdown_page_link)；
+* [MarkDown 页内跳转](#markdown_page_link)；
 
 这里是测试业内跳转的部分：
 
@@ -191,9 +191,6 @@ Markdown的表格语法如下：
       <td>巴黎</td>
       <td>法国</td>
    </tr>
-   <tr>
-      <td></td>
-   </tr>
 </table>
 
 
@@ -203,7 +200,7 @@ Markdown的表格语法如下：
 - [Excel/World表格格式转换成Html格式](http://pressbin.com/tools/excel_to_html_table/index.html "http://pressbin.com/tools/excel_to_html_table/index.html")
 
 
-### <span id="markdown_page_link">MarkDown 业内跳转</span>
+### <span id="markdown_page_link">MarkDown 页内跳转</span>
 
 如果亲们写了一篇很长的文章，要是没有目录的话。阅读起来十分不便。 页内跳转 就能很好的解决这个问题。
 
