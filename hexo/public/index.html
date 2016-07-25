@@ -258,6 +258,283 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/25/markdown table/" itemprop="url">
+                  MarkDown Leaner(表格以及锚).md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T17:03:39+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/文本编辑/" itemprop="url" rel="index">
+                    <span itemprop="name">文本编辑</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/文本编辑/MarkDown/" itemprop="url" rel="index">
+                    <span itemprop="name">MarkDown</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MarkDown-常用技巧"><a href="#MarkDown-常用技巧" class="headerlink" title="MarkDown 常用技巧"></a>MarkDown 常用技巧<a id="begin"></a></h2><p><a href="http://markdownpad.com/" title="http://markdownpad.com/" target="_blank" rel="external">markdown</a>是一种轻量级的「标记语言」，其语法简单有效。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+<p>这里对于简单的语法就不做阐述了，由各位客官自行揣摩，本篇小文主要是正对两个方面做一记录和阐述：</p>
+<ul>
+<li><a href="#markdown_table">MarkDown 表格语法</a>；</li>
+<li><a href="#markdown_page_link">MarkDown实现页内跳转</a>；</li>
+</ul>
+<p>这里是测试业内跳转的部分：</p>
+<ul>
+<li>测试一<a id="test1"></a></li>
+<li><span id="test2">测试二</span></li>
+<li><span name="test3">测试三</span></li>
+</ul>
+<h3 id="MarkDown-简单语法入门"><a href="#MarkDown-简单语法入门" class="headerlink" title="MarkDown 简单语法入门"></a>MarkDown 简单语法入门</h3><p>参考常用的Markdown语法：</p>
+<ul>
+<li><a href="http://wowubuntu.com/markdown/#list" title="http://wowubuntu.com/markdown/#list" target="_blank" rel="external">Markdown 语法说明 (简体中文版)</a></li>
+<li><a href="http://daringfireball.net/projects/markdown/syntax" title="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">创始人 John Gruber 的 Markdown 语法说明</a></li>
+<li><a href="https://learn.getgrav.org/content/markdown" title="https://learn.getgrav.org/content/markdown" target="_blank" rel="external">Markdown常见语法</a></li>
+<li><a href="http://news.cnblogs.com/n/139649/" title="http://news.cnblogs.com/n/139649/" target="_blank" rel="external">为什么我们要学习Markdown的三个理由</a></li>
+</ul>
+<p>工具集合</p>
+<ul>
+<li><a href="https://maxiang.io/" title="https://maxiang.io/" target="_blank" rel="external">马克飞象，专为印象笔记打造的Markdown编辑器，非常推荐</a></li>
+<li><a href="https://www.getcloudapp.com/" title="https://www.getcloudapp.com/" target="_blank" rel="external">cloudapp ： Easily share anything, anywhere</a></li>
+<li><a href="http://www.appinn.com/markdown-tools/" title="http://www.appinn.com/markdown-tools/" target="_blank" rel="external">Markdown 工具补完</a></li>
+</ul>
+<p>简要说明，使用Markdown的有点：</p>
+<ul>
+<li>使你你专注文字内容而不是排版样式，安心写作。</li>
+<li>使你轻松的导出 HTML、PDF 和本身的 .md 文件，利于编辑以及共享。</li>
+<li>使你轻松入门，学习成本较低，并且与各大知名网站兼容，如 Github等，以及各种blog格式，如博客园等，其可读、直观、学习成本低。</li>
+</ul>
+<p><a href="http://markdownpad.com/" title="http://markdownpad.com/" target="_blank" rel="external">markdown</a>常用语法很简单，可以从上面说的入门中进行学习。<br>下面主要针对 表格和页内跳转进行整理。</p>
+<h3 id="MarkDown-表格语法"><a href="#MarkDown-表格语法" class="headerlink" title="MarkDown 表格语法"></a><span id="markdown_table">MarkDown 表格语法</span></h3><p>Markdown的表格语法如下：</p>
+<pre><code>| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+</code></pre><blockquote>
+<p>Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.</p>
+</blockquote>
+<p>其对应的Html如下：</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Option&lt;/th&gt;
+    &lt;th&gt;Description&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;data&lt;/td&gt;
+    &lt;td&gt;path to data files to supply the data that will be passed into templates.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;engine&lt;/td&gt;
+    &lt;td&gt;engine to be used for processing templates. Handlebars is the default.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ext&lt;/td&gt;
+    &lt;td&gt;extension to be used for dest files.&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><p>也就是说，上述两种方式都可以实现简单的表格。</p>
+<p>如果，你足够细心，你可能会想到，表格单元中的内容对其方式，上述默认对齐方式是按照左对齐的。</p>
+<p>但是如果你想让表格中的内容右对齐，或者居中显示呢？其实实现也很简单：</p>
+<ul>
+<li><p>右对齐</p>
+<p>  | Option | Description |<br>  | ——: | ———–: |<br>  | data   | path to data files to supply the data that will be passed into templates. |<br>  | engine | engine to be used for processing templates. Handlebars is the default. |<br>  | ext    | extension to be used for dest files. |</p>
+</li>
+<li><p>居中对齐</p>
+<p>  | Option | Description |<br>  | :——: | :———–: |<br>  | data   | path to data files to supply the data that will be passed into templates. |<br>  | engine | engine to be used for processing templates. Handlebars is the default. |<br>  | ext    | extension to be used for dest files. |</p>
+</li>
+</ul>
+<p>不知道有没有看到修改之处 </p>
+<pre><code>&quot;| :------: | :-----------: |&quot;
+</code></pre><p>核心就在于这里的修改之处,冒号的添加，如果右边有，就居右显示，左边有就局左显示，左右都有，就居中显示，默认为居左显示。</p>
+<p>来个混合的，看看效果</p>
+<pre><code>| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+</code></pre><p>参考：<a href="http://www.ituring.com.cn/article/3452" title="http://www.ituring.com.cn/article/3452" target="_blank" rel="external">Markdown之表格的处理</a>，然后得到转化后的html，复制粘贴到markdown就行。</p>
+<p>当然有的时候，我们需要将需要在文章中插入一段表格，或者 将EXCEL表格插入到Markdown中，当然可以用截图，但是截图显然不合适，而且截图不好控制，比如表格过长的情况下。</p>
+<p>针对将 将EXCEL表格插入到Markdown中，我们可以通过 <a href="http://pressbin.com/tools/excel_to_html_table/index.html" title="http://pressbin.com/tools/excel_to_html_table/index.html" target="_blank" rel="external">将EXCEL/Word表格转化成HTML格式的在线网站</a></p>
+<p>例如：经excel复制表格内容如下：</p>
+<pre><code>编号    城市    国家
+1    北京    中国
+2    西安    中国
+3    纽约    美国
+4    巴黎    法国
+</code></pre><p>生成html代码：</p>
+<pre><code>&lt;table&gt;
+   &lt;tr&gt;
+      &lt;td&gt;编号&lt;/td&gt;
+      &lt;td&gt;城市&lt;/td&gt;
+      &lt;td&gt;国家&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;北京&lt;/td&gt;
+      &lt;td&gt;中国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;西安&lt;/td&gt;
+      &lt;td&gt;中国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;纽约&lt;/td&gt;
+      &lt;td&gt;美国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;巴黎&lt;/td&gt;
+      &lt;td&gt;法国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><p>效果如下：</p>
+<table><br>   <tr><br>      <td>编号</td><br>      <td>城市</td><br>      <td>国家</td><br>   </tr><br>   <tr><br>      <td>1</td><br>      <td>北京</td><br>      <td>中国</td><br>   </tr><br>   <tr><br>      <td>2</td><br>      <td>西安</td><br>      <td>中国</td><br>   </tr><br>   <tr><br>      <td>3</td><br>      <td>纽约</td><br>      <td>美国</td><br>   </tr><br>   <tr><br>      <td>4</td><br>      <td>巴黎</td><br>      <td>法国</td><br>   </tr><br>   <tr><br>      <td></td><br>   </tr><br></table>
+
+
+<p>参考： </p>
+<ul>
+<li><a href="http://www.wooaii.com/archives/3434.html" title="http://www.wooaii.com/archives/3434.html" target="_blank" rel="external">markdown做表格</a></li>
+<li><a href="http://pressbin.com/tools/excel_to_html_table/index.html" title="http://pressbin.com/tools/excel_to_html_table/index.html" target="_blank" rel="external">Excel/World表格格式转换成Html格式</a></li>
+</ul>
+<h3 id="MarkDown-业内跳转"><a href="#MarkDown-业内跳转" class="headerlink" title="MarkDown 业内跳转"></a><span id="markdown_page_link">MarkDown 业内跳转</span></h3><p>如果亲们写了一篇很长的文章，要是没有目录的话。阅读起来十分不便。 页内跳转 就能很好的解决这个问题。</p>
+<p>业内跳转 这个概念在Html中就有，当然Markdown的语法也可以实现。</p>
+<h4 id="Html中的页内跳转"><a href="#Html中的页内跳转" class="headerlink" title="Html中的页内跳转"></a>Html中的页内跳转</h4><p>即HTML 锚（anchor)的实现，当使用命名锚（named anchors）时，我们可以创建直接跳至该命名锚（比如页面中某个小节）的链接，这样使用者就无需不停地滚动页面来寻找他们需要的信息了。</p>
+<pre><code>&lt;a name=&quot;label&quot;&gt;锚（显示在页面上的文本）&lt;/a&gt;
+</code></pre><p>提示：锚的名称可以是任何你喜欢的名字。</p>
+<p>提示：您可以使用 id 属性来替代 name 属性，命名锚同样有效。</p>
+<p>例如：</p>
+<p>首先，我们在 HTML 文档中对锚进行命名（创建一个书签）：</p>
+<pre><code>&lt;a name=&quot;tips&quot;&gt;基本的注意事项 - 有用的提示&lt;/a&gt;
+</code></pre><p>然后，我们在同一个文档中创建指向该锚的链接：</p>
+<pre><code>&lt;a href=&quot;#tips&quot;&gt;有用的提示&lt;/a&gt;
+</code></pre><blockquote>
+<p>参考：<a href="http://www.w3school.com.cn/html/html_links.asp" title="http://www.w3school.com.cn/html/html_links.asp" target="_blank" rel="external">w3school:HTML 链接</a></p>
+</blockquote>
+<h4 id="MarkDown的具体实现"><a href="#MarkDown的具体实现" class="headerlink" title="MarkDown的具体实现"></a>MarkDown的具体实现</h4><p>arkDown的具体实现其实和Html的很类似，也是需要定义类似 锚 的属性，然后通过</p>
+<pre><code>[需要显示的名称](#锚的属性)
+</code></pre><p>实现跳转。</p>
+<p>例如我们点击跳转到开始：</p>
+<ul>
+<li><a href="#begin">跳转到首页</a></li>
+<li><a href="#test1">跳转到测试一</a></li>
+<li><a href="#test2">跳转到测试二</a></li>
+<li><a href="#test3">跳转到测试三</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/22/Groovy learner/" itemprop="url">
                   Groovy learner.md
                 </a>
@@ -2262,6 +2539,263 @@ final ArrayList&lt;ContentProviderConnection&gt; conProviders = new ArrayList&lt
             
               
                 
+                <a class="post-title-link" href="/2016/06/13/如何实现一个缓存系统/" itemprop="url">
+                  如何实现一个缓存系统
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-13T11:24:36+08:00" content="2016-06-13">
+              2016-06-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="如何实现一个缓存系统"><a href="#如何实现一个缓存系统" class="headerlink" title="如何实现一个缓存系统"></a>如何实现一个缓存系统</h2><p>试想这样一个场景，当你当你的而应用频繁要运用某一个组件的时候，而这个组件因动态原因都放置在网络或者disk上，这个时候必然会涉及性能的问题，碰到这类问题，我们自然而然的就会想到缓存，那么，我们该如何实现一个缓存系统，或者说是怎么从零开始设计一个缓存系统，接下来，就让我们一步步来见证一个缓存系统的实现。</p>
+<h3 id="设计前准备工作"><a href="#设计前准备工作" class="headerlink" title="设计前准备工作"></a>设计前准备工作</h3><p>ok，这个时候我们脑通打开，高速旋转，做之前，我们要想明白这几件事情</p>
+<ul>
+<li>缓存到那个级别，即缓存到哪里？</li>
+<li>如何访问缓存，即如何设计缓存API？</li>
+</ul>
+<p>带着这几个问题，让问题先转一下，缓存到什么地方，说白了，就是找个地来存储这些中间组件，而这些地方都有什么呢，常见的一般有内存、disk,设置网络（像云、网盘等）。</p>
+<p>然后，我们知道要缓存到这些组件到上述说的这些地方上，那么缓存到这些地方上有什么好处呢？提高访问速度，对这个绝对是我们最想要的。</p>
+<p>明白了上述，接下来就是如何缓存常用组件到内存、disk、网络上了。</p>
+<h3 id="接口API实现"><a href="#接口API实现" class="headerlink" title="接口API实现"></a>接口API实现</h3><p>接下来，我们以实现 内存+disk双缓存设计为例来描述下如何去涉及一个缓存接口的API。</p>
+<h4 id="第一步，抽象出一个需要缓存的组件实例"><a href="#第一步，抽象出一个需要缓存的组件实例" class="headerlink" title="第一步，抽象出一个需要缓存的组件实例"></a>第一步，抽象出一个需要缓存的组件实例</h4><pre><code>public Class ComponentBean{
+
+    public void toString(){}
+}
+</code></pre><h4 id="第二步，设计内存缓存接口"><a href="#第二步，设计内存缓存接口" class="headerlink" title="第二步，设计内存缓存接口"></a>第二步，设计内存缓存接口</h4><p>内存中的缓存接口设计，首先我们想到的是Map,当然如果系统版本高于19，我们可以用ArrayMap,如果key值设计为Long,我们可以使用LongSparseArray.</p>
+<ul>
+<li>ArrayMap</li>
+</ul>
+<blockquote>
+<p>ArrayMap is a generic key-&gt;value mapping data structure that is designed to be more memory efficient than a traditional HashMap. It keeps its mappings in an array data structure – an integer array of hash codes for each item, and an Object array of the key/value pairs.</p>
+</blockquote>
+<p>Added in API level 19</p>
+<ul>
+<li>LongSparseArray</li>
+</ul>
+<blockquote>
+<p>SparseArray mapping longs to Objects. Unlike a normal array of Objects, there can be gaps in the indices. It is intended to be more memory efficient than using a HashMap to map Longs to Objects, both because it avoids auto-boxing keys and its data structure doesn’t rely on an extra entry object for each mapping.</p>
+</blockquote>
+<p>Added in API level 16</p>
+<p>本次设计内存缓存，主要基于最常用的Map来设计。</p>
+<pre><code>public interface IMemeoryCache{
+
+    void put(String key, Reference&lt;ComponentBean&gt;value);
+
+    ComponentBean get(String key);
+}
+</code></pre><p>上述是一个基本的设计，有存有取，那么接下来，要继续扩展一些基本的接口。试想 ，一个内存缓存系统除了存取之外，应该还有什么操作入口？remove?contain？是的，一个操作接口应该还包含一个删除入口、一个查询是否包含入口、一个能获取到当前缓存所有数据的入口、清空当前缓存数据的入口。</p>
+<ul>
+<li><p>删除入口</p>
+<p>  删除，参照JDK Map设计，我们可以定义一下接口</p>
+<pre><code>ComponentBean remove(String key);
+</code></pre></li>
+<li><p>查询是否包含入口</p>
+<pre><code>boolean contain(String key);
+</code></pre></li>
+<li><p>获取到当前缓存所有数据的入口</p>
+<p>  这个借口的实现，我们只要能获取到当前缓存中所有key值映射，就可以遍历当前缓存中所有数据了，所以</p>
+<pre><code>Collection&lt;String&gt;keys();
+</code></pre></li>
+<li><p>清空当前缓存数据的入口</p>
+<p>  void clear();</p>
+</li>
+</ul>
+<p>最终设计下来，整体应该是：</p>
+<pre><code>public interface IMemeoryCache{
+
+    void put(String key, Reference&lt;ComponentBean&gt;value);
+
+    ComponentBean get(String key);
+
+    ComponentBean remove(String key);
+
+    boolean contain(String key);
+
+    Collection&lt;String&gt;keys();
+
+    void clear();
+}
+</code></pre><p>当然，如果后续有需求，可以继续扩展 IMemeoryCache接口，骚年，拓展吧。</p>
+<h4 id="第三步，设计Disk缓存接口"><a href="#第三步，设计Disk缓存接口" class="headerlink" title="第三步，设计Disk缓存接口"></a>第三步，设计Disk缓存接口</h4><p>Disk缓存，骚年们首先想到是什么呢？流操作？对象序列化？定义一个合理的缓存目录？反正，我先想到的是对象序列化，为什么，因为本次示例存储的就是一个对象嘛。</p>
+<p>ok,接下来，我们先将我们要存储的对象序列化了</p>
+<ul>
+<li><p>存储的对象序列化</p>
+<p>  package com.haio.uil;</p>
+<p>  import android.os.Parcel;<br>  import android.os.Parcelable;</p>
+<p>  public class ComponentBean implements Parcelable {</p>
+<pre><code>private int componentId;
+
+ComponentBean(Parcel in) {
+    super();
+    this.componentId = in.readInt();
+}
+
+@Override
+public int describeContents() {
+    return 0;
+}
+
+@Override
+public void writeToParcel(Parcel paramParcel, int flag) {
+    paramParcel.writeInt(componentId);
+}
+
+public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creator&lt;ComponentBean&gt;() {
+
+    @Override
+    public ComponentBean[] newArray(int size) {
+        return new ComponentBean[size];
+    }
+
+    @Override
+    public ComponentBean createFromParcel(Parcel paramParcel) {
+        return new ComponentBean(paramParcel);
+    }
+};
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p>在Android中使用序列化，无非两种途经： Parcelable 和 Serializable。</p>
+<p>对象序列化的目的：</p>
+<p>1）永久性保存对象，保存对象的字节序列到本地文件中；<br>2）通过序列化对象在网络中传递对象；<br>3）通过序列化在进程间传递对象。</p>
+<p>要说明一点，本文主讲的对象 并非对象的序列化，所以如何序列化对象就不做重点阐述，但可以给出参考链接<br><a href="http://developer.android.com/intl/zh-cn/reference/android/os/Parcelable.html#PARCELABLE_WRITE_RETURN_VALUE" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/reference/android/os/Parcelable.html#PARCELABLE_WRITE_RETURN_VALUE</a></p>
+<p><a href="http://www.developerphil.com/parcelable-vs-serializable/" target="_blank" rel="external">http://www.developerphil.com/parcelable-vs-serializable/</a></p>
+<ul>
+<li>Disk存储接口设计</li>
+</ul>
+<p>如Memorycache设计一样，我们先给出一个基本的入口，然后一次扩展</p>
+<pre><code>public interface IDiskCache{
+
+    File getDirectory();
+
+    boolean save(String filename, ComponentBean bean) throws IOException;
+
+    File get(String filename);
+}
+</code></pre><p>上述是一个基本的设计，有存有取，并且可以获取到当前存储的缓存目录，那么接下来，要继续扩展一些基本的接口。试想 ，一个Disk缓存系统除了存取之外，应该还有什么操作入口？remove?资源释放close？是的，disk cache操作接口应该还包含一个删除入口、清空当前缓存数据的入口、关闭流数据入口（毕竟设计IO操作）。</p>
+<p>最终设计应该如下：</p>
+<pre><code>public interface IDiskCache{
+
+    File getDirectory();
+
+    boolean save(String filename, ComponentBean bean) throws IOException;
+
+    File get(String filename);
+
+    boolean remove(String imageUri);
+
+    void close();
+
+    void clear();
+}
+</code></pre><p>重要的接口设计完了，接下来就是实现了，后续且听下回分解。</p>
+<h2 id="缓存示例"><a href="#缓存示例" class="headerlink" title="缓存示例"></a>缓存示例</h2><p>###MemoryCache缓存</p>
+<p>做一个memoryCache缓存系统，想想该如何设计，照之前的接口设计，我们通过Reference来缓存Object，这样并不能保证所缓存的对象一直存在，比如，通过WeakReference来缓存对象，当GCRoot可以遍历到时，就会回收。所以，如果设计缓存，我们在之前的基础上，加一个强引用缓存（有一定数目限制），这样就可以保证有一部分常用对象的重复利用。</p>
+<p>重庆-zhusx(327270607)  11:43:52<br>如果你想序列化传递的话…整个对象的成员变量都得序列化<br>这个也就是为什么你之前这么写 会报错.<br>重庆-zhusx(327270607)  11:45:58<br>内部类 会把 外面一层的东西都包进去…也就是 所有对象必须序列话,而且外面一层的..的所有变量都序列化…</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/13/android-anr分析/" itemprop="url">
                   Android ANR 分析
                 </a>
@@ -2880,368 +3414,13 @@ DALVIK THREADS:
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/13/如何实现一个缓存系统/" itemprop="url">
-                  如何实现一个缓存系统
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-13T11:24:36+08:00" content="2016-06-13">
-              2016-06-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="如何实现一个缓存系统"><a href="#如何实现一个缓存系统" class="headerlink" title="如何实现一个缓存系统"></a>如何实现一个缓存系统</h2><p>试想这样一个场景，当你当你的而应用频繁要运用某一个组件的时候，而这个组件因动态原因都放置在网络或者disk上，这个时候必然会涉及性能的问题，碰到这类问题，我们自然而然的就会想到缓存，那么，我们该如何实现一个缓存系统，或者说是怎么从零开始设计一个缓存系统，接下来，就让我们一步步来见证一个缓存系统的实现。</p>
-<h3 id="设计前准备工作"><a href="#设计前准备工作" class="headerlink" title="设计前准备工作"></a>设计前准备工作</h3><p>ok，这个时候我们脑通打开，高速旋转，做之前，我们要想明白这几件事情</p>
-<ul>
-<li>缓存到那个级别，即缓存到哪里？</li>
-<li>如何访问缓存，即如何设计缓存API？</li>
-</ul>
-<p>带着这几个问题，让问题先转一下，缓存到什么地方，说白了，就是找个地来存储这些中间组件，而这些地方都有什么呢，常见的一般有内存、disk,设置网络（像云、网盘等）。</p>
-<p>然后，我们知道要缓存到这些组件到上述说的这些地方上，那么缓存到这些地方上有什么好处呢？提高访问速度，对这个绝对是我们最想要的。</p>
-<p>明白了上述，接下来就是如何缓存常用组件到内存、disk、网络上了。</p>
-<h3 id="接口API实现"><a href="#接口API实现" class="headerlink" title="接口API实现"></a>接口API实现</h3><p>接下来，我们以实现 内存+disk双缓存设计为例来描述下如何去涉及一个缓存接口的API。</p>
-<h4 id="第一步，抽象出一个需要缓存的组件实例"><a href="#第一步，抽象出一个需要缓存的组件实例" class="headerlink" title="第一步，抽象出一个需要缓存的组件实例"></a>第一步，抽象出一个需要缓存的组件实例</h4><pre><code>public Class ComponentBean{
-
-    public void toString(){}
-}
-</code></pre><h4 id="第二步，设计内存缓存接口"><a href="#第二步，设计内存缓存接口" class="headerlink" title="第二步，设计内存缓存接口"></a>第二步，设计内存缓存接口</h4><p>内存中的缓存接口设计，首先我们想到的是Map,当然如果系统版本高于19，我们可以用ArrayMap,如果key值设计为Long,我们可以使用LongSparseArray.</p>
-<ul>
-<li>ArrayMap</li>
-</ul>
-<blockquote>
-<p>ArrayMap is a generic key-&gt;value mapping data structure that is designed to be more memory efficient than a traditional HashMap. It keeps its mappings in an array data structure – an integer array of hash codes for each item, and an Object array of the key/value pairs.</p>
-</blockquote>
-<p>Added in API level 19</p>
-<ul>
-<li>LongSparseArray</li>
-</ul>
-<blockquote>
-<p>SparseArray mapping longs to Objects. Unlike a normal array of Objects, there can be gaps in the indices. It is intended to be more memory efficient than using a HashMap to map Longs to Objects, both because it avoids auto-boxing keys and its data structure doesn’t rely on an extra entry object for each mapping.</p>
-</blockquote>
-<p>Added in API level 16</p>
-<p>本次设计内存缓存，主要基于最常用的Map来设计。</p>
-<pre><code>public interface IMemeoryCache{
-
-    void put(String key, Reference&lt;ComponentBean&gt;value);
-
-    ComponentBean get(String key);
-}
-</code></pre><p>上述是一个基本的设计，有存有取，那么接下来，要继续扩展一些基本的接口。试想 ，一个内存缓存系统除了存取之外，应该还有什么操作入口？remove?contain？是的，一个操作接口应该还包含一个删除入口、一个查询是否包含入口、一个能获取到当前缓存所有数据的入口、清空当前缓存数据的入口。</p>
-<ul>
-<li><p>删除入口</p>
-<p>  删除，参照JDK Map设计，我们可以定义一下接口</p>
-<pre><code>ComponentBean remove(String key);
-</code></pre></li>
-<li><p>查询是否包含入口</p>
-<pre><code>boolean contain(String key);
-</code></pre></li>
-<li><p>获取到当前缓存所有数据的入口</p>
-<p>  这个借口的实现，我们只要能获取到当前缓存中所有key值映射，就可以遍历当前缓存中所有数据了，所以</p>
-<pre><code>Collection&lt;String&gt;keys();
-</code></pre></li>
-<li><p>清空当前缓存数据的入口</p>
-<p>  void clear();</p>
-</li>
-</ul>
-<p>最终设计下来，整体应该是：</p>
-<pre><code>public interface IMemeoryCache{
-
-    void put(String key, Reference&lt;ComponentBean&gt;value);
-
-    ComponentBean get(String key);
-
-    ComponentBean remove(String key);
-
-    boolean contain(String key);
-
-    Collection&lt;String&gt;keys();
-
-    void clear();
-}
-</code></pre><p>当然，如果后续有需求，可以继续扩展 IMemeoryCache接口，骚年，拓展吧。</p>
-<h4 id="第三步，设计Disk缓存接口"><a href="#第三步，设计Disk缓存接口" class="headerlink" title="第三步，设计Disk缓存接口"></a>第三步，设计Disk缓存接口</h4><p>Disk缓存，骚年们首先想到是什么呢？流操作？对象序列化？定义一个合理的缓存目录？反正，我先想到的是对象序列化，为什么，因为本次示例存储的就是一个对象嘛。</p>
-<p>ok,接下来，我们先将我们要存储的对象序列化了</p>
-<ul>
-<li><p>存储的对象序列化</p>
-<p>  package com.haio.uil;</p>
-<p>  import android.os.Parcel;<br>  import android.os.Parcelable;</p>
-<p>  public class ComponentBean implements Parcelable {</p>
-<pre><code>private int componentId;
-
-ComponentBean(Parcel in) {
-    super();
-    this.componentId = in.readInt();
-}
-
-@Override
-public int describeContents() {
-    return 0;
-}
-
-@Override
-public void writeToParcel(Parcel paramParcel, int flag) {
-    paramParcel.writeInt(componentId);
-}
-
-public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creator&lt;ComponentBean&gt;() {
-
-    @Override
-    public ComponentBean[] newArray(int size) {
-        return new ComponentBean[size];
-    }
-
-    @Override
-    public ComponentBean createFromParcel(Parcel paramParcel) {
-        return new ComponentBean(paramParcel);
-    }
-};
-</code></pre><p>  }</p>
-</li>
-</ul>
-<p>在Android中使用序列化，无非两种途经： Parcelable 和 Serializable。</p>
-<p>对象序列化的目的：</p>
-<p>1）永久性保存对象，保存对象的字节序列到本地文件中；<br>2）通过序列化对象在网络中传递对象；<br>3）通过序列化在进程间传递对象。</p>
-<p>要说明一点，本文主讲的对象 并非对象的序列化，所以如何序列化对象就不做重点阐述，但可以给出参考链接<br><a href="http://developer.android.com/intl/zh-cn/reference/android/os/Parcelable.html#PARCELABLE_WRITE_RETURN_VALUE" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/reference/android/os/Parcelable.html#PARCELABLE_WRITE_RETURN_VALUE</a></p>
-<p><a href="http://www.developerphil.com/parcelable-vs-serializable/" target="_blank" rel="external">http://www.developerphil.com/parcelable-vs-serializable/</a></p>
-<ul>
-<li>Disk存储接口设计</li>
-</ul>
-<p>如Memorycache设计一样，我们先给出一个基本的入口，然后一次扩展</p>
-<pre><code>public interface IDiskCache{
-
-    File getDirectory();
-
-    boolean save(String filename, ComponentBean bean) throws IOException;
-
-    File get(String filename);
-}
-</code></pre><p>上述是一个基本的设计，有存有取，并且可以获取到当前存储的缓存目录，那么接下来，要继续扩展一些基本的接口。试想 ，一个Disk缓存系统除了存取之外，应该还有什么操作入口？remove?资源释放close？是的，disk cache操作接口应该还包含一个删除入口、清空当前缓存数据的入口、关闭流数据入口（毕竟设计IO操作）。</p>
-<p>最终设计应该如下：</p>
-<pre><code>public interface IDiskCache{
-
-    File getDirectory();
-
-    boolean save(String filename, ComponentBean bean) throws IOException;
-
-    File get(String filename);
-
-    boolean remove(String imageUri);
-
-    void close();
-
-    void clear();
-}
-</code></pre><p>重要的接口设计完了，接下来就是实现了，后续且听下回分解。</p>
-<h2 id="缓存示例"><a href="#缓存示例" class="headerlink" title="缓存示例"></a>缓存示例</h2><p>###MemoryCache缓存</p>
-<p>做一个memoryCache缓存系统，想想该如何设计，照之前的接口设计，我们通过Reference来缓存Object，这样并不能保证所缓存的对象一直存在，比如，通过WeakReference来缓存对象，当GCRoot可以遍历到时，就会回收。所以，如果设计缓存，我们在之前的基础上，加一个强引用缓存（有一定数目限制），这样就可以保证有一部分常用对象的重复利用。</p>
-<p>重庆-zhusx(327270607)  11:43:52<br>如果你想序列化传递的话…整个对象的成员变量都得序列化<br>这个也就是为什么你之前这么写 会报错.<br>重庆-zhusx(327270607)  11:45:58<br>内部类 会把 外面一层的东西都包进去…也就是 所有对象必须序列话,而且外面一层的..的所有变量都序列化…</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/13/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-13T09:28:44+08:00" content="2016-06-13">
-              2016-06-13
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -3280,7 +3459,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -3288,7 +3467,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -3297,7 +3476,7 @@ public static final Parcelable.Creator&lt;ComponentBean&gt; CREATOR = new Creato
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

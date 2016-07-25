@@ -1,0 +1,847 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MarkDown,文本编辑," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="MarkDown 常用技巧markdown是一种轻量级的「标记语言」，其语法简单有效。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。
+这里对于简单的语法就不做阐述了，由各位客官自行揣摩，本篇小文主要是正对两个方面做一记录和阐述：
+
+MarkDown 表格语法；
+Mark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MarkDown Leaner(表格以及锚).md">
+<meta property="og:url" content="http://91yang.github.io/2016/07/25/markdown table/index.html">
+<meta property="og:site_name" content="Glory Seeker">
+<meta property="og:description" content="MarkDown 常用技巧markdown是一种轻量级的「标记语言」，其语法简单有效。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。
+这里对于简单的语法就不做阐述了，由各位客官自行揣摩，本篇小文主要是正对两个方面做一记录和阐述：
+
+MarkDown 表格语法；
+Mark">
+<meta property="og:updated_time" content="2016-07-25T06:40:00.061Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MarkDown Leaner(表格以及锚).md">
+<meta name="twitter:description" content="MarkDown 常用技巧markdown是一种轻量级的「标记语言」，其语法简单有效。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。
+这里对于简单的语法就不做阐述了，由各位客官自行揣摩，本篇小文主要是正对两个方面做一记录和阐述：
+
+MarkDown 表格语法；
+Mark">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://91yang.github.io/2016/07/25/markdown table/"/>
+
+  <title> MarkDown Leaner(表格以及锚).md | Glory Seeker </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Glory Seeker</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Make progress step by step everyday！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MarkDown Leaner(表格以及锚).md
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T17:03:39+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/文本编辑/" itemprop="url" rel="index">
+                    <span itemprop="name">文本编辑</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/文本编辑/MarkDown/" itemprop="url" rel="index">
+                    <span itemprop="name">MarkDown</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="MarkDown-常用技巧"><a href="#MarkDown-常用技巧" class="headerlink" title="MarkDown 常用技巧"></a>MarkDown 常用技巧<a id="begin"></a></h2><p><a href="http://markdownpad.com/" title="http://markdownpad.com/" target="_blank" rel="external">markdown</a>是一种轻量级的「标记语言」，其语法简单有效。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+<p>这里对于简单的语法就不做阐述了，由各位客官自行揣摩，本篇小文主要是正对两个方面做一记录和阐述：</p>
+<ul>
+<li><a href="#markdown_table">MarkDown 表格语法</a>；</li>
+<li><a href="#markdown_page_link">MarkDown实现页内跳转</a>；</li>
+</ul>
+<p>这里是测试业内跳转的部分：</p>
+<ul>
+<li>测试一<a id="test1"></a></li>
+<li><span id="test2">测试二</span></li>
+<li><span name="test3">测试三</span></li>
+</ul>
+<h3 id="MarkDown-简单语法入门"><a href="#MarkDown-简单语法入门" class="headerlink" title="MarkDown 简单语法入门"></a>MarkDown 简单语法入门</h3><p>参考常用的Markdown语法：</p>
+<ul>
+<li><a href="http://wowubuntu.com/markdown/#list" title="http://wowubuntu.com/markdown/#list" target="_blank" rel="external">Markdown 语法说明 (简体中文版)</a></li>
+<li><a href="http://daringfireball.net/projects/markdown/syntax" title="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">创始人 John Gruber 的 Markdown 语法说明</a></li>
+<li><a href="https://learn.getgrav.org/content/markdown" title="https://learn.getgrav.org/content/markdown" target="_blank" rel="external">Markdown常见语法</a></li>
+<li><a href="http://news.cnblogs.com/n/139649/" title="http://news.cnblogs.com/n/139649/" target="_blank" rel="external">为什么我们要学习Markdown的三个理由</a></li>
+</ul>
+<p>工具集合</p>
+<ul>
+<li><a href="https://maxiang.io/" title="https://maxiang.io/" target="_blank" rel="external">马克飞象，专为印象笔记打造的Markdown编辑器，非常推荐</a></li>
+<li><a href="https://www.getcloudapp.com/" title="https://www.getcloudapp.com/" target="_blank" rel="external">cloudapp ： Easily share anything, anywhere</a></li>
+<li><a href="http://www.appinn.com/markdown-tools/" title="http://www.appinn.com/markdown-tools/" target="_blank" rel="external">Markdown 工具补完</a></li>
+</ul>
+<p>简要说明，使用Markdown的有点：</p>
+<ul>
+<li>使你你专注文字内容而不是排版样式，安心写作。</li>
+<li>使你轻松的导出 HTML、PDF 和本身的 .md 文件，利于编辑以及共享。</li>
+<li>使你轻松入门，学习成本较低，并且与各大知名网站兼容，如 Github等，以及各种blog格式，如博客园等，其可读、直观、学习成本低。</li>
+</ul>
+<p><a href="http://markdownpad.com/" title="http://markdownpad.com/" target="_blank" rel="external">markdown</a>常用语法很简单，可以从上面说的入门中进行学习。<br>下面主要针对 表格和页内跳转进行整理。</p>
+<h3 id="MarkDown-表格语法"><a href="#MarkDown-表格语法" class="headerlink" title="MarkDown 表格语法"></a><span id="markdown_table">MarkDown 表格语法</span></h3><p>Markdown的表格语法如下：</p>
+<pre><code>| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+</code></pre><blockquote>
+<p>Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.</p>
+</blockquote>
+<p>其对应的Html如下：</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Option&lt;/th&gt;
+    &lt;th&gt;Description&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;data&lt;/td&gt;
+    &lt;td&gt;path to data files to supply the data that will be passed into templates.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;engine&lt;/td&gt;
+    &lt;td&gt;engine to be used for processing templates. Handlebars is the default.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ext&lt;/td&gt;
+    &lt;td&gt;extension to be used for dest files.&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><p>也就是说，上述两种方式都可以实现简单的表格。</p>
+<p>如果，你足够细心，你可能会想到，表格单元中的内容对其方式，上述默认对齐方式是按照左对齐的。</p>
+<p>但是如果你想让表格中的内容右对齐，或者居中显示呢？其实实现也很简单：</p>
+<ul>
+<li><p>右对齐</p>
+<p>  | Option | Description |<br>  | ——: | ———–: |<br>  | data   | path to data files to supply the data that will be passed into templates. |<br>  | engine | engine to be used for processing templates. Handlebars is the default. |<br>  | ext    | extension to be used for dest files. |</p>
+</li>
+<li><p>居中对齐</p>
+<p>  | Option | Description |<br>  | :——: | :———–: |<br>  | data   | path to data files to supply the data that will be passed into templates. |<br>  | engine | engine to be used for processing templates. Handlebars is the default. |<br>  | ext    | extension to be used for dest files. |</p>
+</li>
+</ul>
+<p>不知道有没有看到修改之处 </p>
+<pre><code>&quot;| :------: | :-----------: |&quot;
+</code></pre><p>核心就在于这里的修改之处,冒号的添加，如果右边有，就居右显示，左边有就局左显示，左右都有，就居中显示，默认为居左显示。</p>
+<p>来个混合的，看看效果</p>
+<pre><code>| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+</code></pre><p>参考：<a href="http://www.ituring.com.cn/article/3452" title="http://www.ituring.com.cn/article/3452" target="_blank" rel="external">Markdown之表格的处理</a>，然后得到转化后的html，复制粘贴到markdown就行。</p>
+<p>当然有的时候，我们需要将需要在文章中插入一段表格，或者 将EXCEL表格插入到Markdown中，当然可以用截图，但是截图显然不合适，而且截图不好控制，比如表格过长的情况下。</p>
+<p>针对将 将EXCEL表格插入到Markdown中，我们可以通过 <a href="http://pressbin.com/tools/excel_to_html_table/index.html" title="http://pressbin.com/tools/excel_to_html_table/index.html" target="_blank" rel="external">将EXCEL/Word表格转化成HTML格式的在线网站</a></p>
+<p>例如：经excel复制表格内容如下：</p>
+<pre><code>编号    城市    国家
+1    北京    中国
+2    西安    中国
+3    纽约    美国
+4    巴黎    法国
+</code></pre><p>生成html代码：</p>
+<pre><code>&lt;table&gt;
+   &lt;tr&gt;
+      &lt;td&gt;编号&lt;/td&gt;
+      &lt;td&gt;城市&lt;/td&gt;
+      &lt;td&gt;国家&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;北京&lt;/td&gt;
+      &lt;td&gt;中国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;西安&lt;/td&gt;
+      &lt;td&gt;中国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;纽约&lt;/td&gt;
+      &lt;td&gt;美国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;巴黎&lt;/td&gt;
+      &lt;td&gt;法国&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><p>效果如下：</p>
+<table><br>   <tr><br>      <td>编号</td><br>      <td>城市</td><br>      <td>国家</td><br>   </tr><br>   <tr><br>      <td>1</td><br>      <td>北京</td><br>      <td>中国</td><br>   </tr><br>   <tr><br>      <td>2</td><br>      <td>西安</td><br>      <td>中国</td><br>   </tr><br>   <tr><br>      <td>3</td><br>      <td>纽约</td><br>      <td>美国</td><br>   </tr><br>   <tr><br>      <td>4</td><br>      <td>巴黎</td><br>      <td>法国</td><br>   </tr><br>   <tr><br>      <td></td><br>   </tr><br></table>
+
+
+<p>参考： </p>
+<ul>
+<li><a href="http://www.wooaii.com/archives/3434.html" title="http://www.wooaii.com/archives/3434.html" target="_blank" rel="external">markdown做表格</a></li>
+<li><a href="http://pressbin.com/tools/excel_to_html_table/index.html" title="http://pressbin.com/tools/excel_to_html_table/index.html" target="_blank" rel="external">Excel/World表格格式转换成Html格式</a></li>
+</ul>
+<h3 id="MarkDown-业内跳转"><a href="#MarkDown-业内跳转" class="headerlink" title="MarkDown 业内跳转"></a><span id="markdown_page_link">MarkDown 业内跳转</span></h3><p>如果亲们写了一篇很长的文章，要是没有目录的话。阅读起来十分不便。 页内跳转 就能很好的解决这个问题。</p>
+<p>业内跳转 这个概念在Html中就有，当然Markdown的语法也可以实现。</p>
+<h4 id="Html中的页内跳转"><a href="#Html中的页内跳转" class="headerlink" title="Html中的页内跳转"></a>Html中的页内跳转</h4><p>即HTML 锚（anchor)的实现，当使用命名锚（named anchors）时，我们可以创建直接跳至该命名锚（比如页面中某个小节）的链接，这样使用者就无需不停地滚动页面来寻找他们需要的信息了。</p>
+<pre><code>&lt;a name=&quot;label&quot;&gt;锚（显示在页面上的文本）&lt;/a&gt;
+</code></pre><p>提示：锚的名称可以是任何你喜欢的名字。</p>
+<p>提示：您可以使用 id 属性来替代 name 属性，命名锚同样有效。</p>
+<p>例如：</p>
+<p>首先，我们在 HTML 文档中对锚进行命名（创建一个书签）：</p>
+<pre><code>&lt;a name=&quot;tips&quot;&gt;基本的注意事项 - 有用的提示&lt;/a&gt;
+</code></pre><p>然后，我们在同一个文档中创建指向该锚的链接：</p>
+<pre><code>&lt;a href=&quot;#tips&quot;&gt;有用的提示&lt;/a&gt;
+</code></pre><blockquote>
+<p>参考：<a href="http://www.w3school.com.cn/html/html_links.asp" title="http://www.w3school.com.cn/html/html_links.asp" target="_blank" rel="external">w3school:HTML 链接</a></p>
+</blockquote>
+<h4 id="MarkDown的具体实现"><a href="#MarkDown的具体实现" class="headerlink" title="MarkDown的具体实现"></a>MarkDown的具体实现</h4><p>arkDown的具体实现其实和Html的很类似，也是需要定义类似 锚 的属性，然后通过</p>
+<pre><code>[需要显示的名称](#锚的属性)
+</code></pre><p>实现跳转。</p>
+<p>例如我们点击跳转到开始：</p>
+<ul>
+<li><a href="#begin">跳转到首页</a></li>
+<li><a href="#test1">跳转到测试一</a></li>
+<li><a href="#test2">跳转到测试二</a></li>
+<li><a href="#test3">跳转到测试三</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="haiolv WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="haiolv Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MarkDown/" rel="tag">#MarkDown</a>
+          
+            <a href="/tags/文本编辑/" rel="tag">#文本编辑</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/22/Groovy learner/" rel="next" title="Groovy learner.md">
+                <i class="fa fa-chevron-left"></i> Groovy learner.md
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.jpg"
+               alt="haiolv" />
+          <p class="site-author-name" itemprop="name">haiolv</p>
+          <p class="site-description motion-element" itemprop="description">Just do it</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haiolv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://developer.android.com/" target="_blank" title="Android 官网">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Android 官网
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cstsinghua.github.io/" title="Atypical programmer" target="_blank">Atypical programmer</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hellokugo.github.io/" title="Hellokugo" target="_blank">Hellokugo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://aso210.github.io/" title="Aso210" target="_blank">Aso210</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MarkDown-常用技巧"><span class="nav-number">1.</span> <span class="nav-text">MarkDown 常用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkDown-简单语法入门"><span class="nav-number">1.1.</span> <span class="nav-text">MarkDown 简单语法入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkDown-表格语法"><span class="nav-number">1.2.</span> <span class="nav-text">MarkDown 表格语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkDown-业内跳转"><span class="nav-number">1.3.</span> <span class="nav-text">MarkDown 业内跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Html中的页内跳转"><span class="nav-number">1.3.1.</span> <span class="nav-text">Html中的页内跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MarkDown的具体实现"><span class="nav-number">1.3.2.</span> <span class="nav-text">MarkDown的具体实现</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haiolv</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
