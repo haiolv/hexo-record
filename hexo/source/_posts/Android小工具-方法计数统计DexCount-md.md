@@ -1,5 +1,5 @@
 ---
-title: Android小工具--方法计数统计DexCount.md
+title: Android小工具--方法计数统计DexCount
 date: 2016-06-17 11:59:52
 tags: [Android,DexCount,Apk方法统计]
 categories: [编程,Android] # 配置categories

@@ -1,5 +1,5 @@
 ---
-title: Protocol Buffer 运用.md
+title: Protocol Buffer 运用
 date: 2016-07-22 17:03:39
 tags: [Android,Google Protocol Buffer,数据序列化]
 categories: [编程,Android] # 配置categories

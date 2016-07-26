@@ -1,5 +1,5 @@
 ---
-title: MarkDown Leaner(表格以及锚).md
+title: MarkDown Leaner(表格以及锚)
 date: 2016-07-25 17:03:39
 tags: [MarkDown,文本编辑]
 categories: [文本编辑,MarkDown] # 配置categories
@@ -76,6 +76,7 @@ Markdown的表格语法如下：
 	    <td>extension to be used for dest files.</td>
 	  </tr>
 	</table>
+
 
 也就是说，上述两种方式都可以实现简单的表格。
 

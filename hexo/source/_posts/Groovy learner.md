@@ -1,5 +1,5 @@
 ---
-title: Groovy learner.md
+title: Groovy learner
 date: 2016-07-22 17:03:39
 tags: [Android，Groovy, gradle插件]
 categories: [编程,Android] # 配置categories
